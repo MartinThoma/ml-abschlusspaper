@@ -1,0 +1,1 @@
+All figures / images should be here.

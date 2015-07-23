@@ -1,0 +1,72 @@
+\documentclass[technote,a4paper]{IEEEtran}
+\usepackage{amssymb, amsmath} % needed for math
+
+\usepackage[a-1b]{pdfx}
+\usepackage{filecontents}
+\begin{filecontents*}{\jobname.xmpdata}
+    \Keywords{recognition\sep machine learning\sep neural networks\sep symbols\sep multilayer perceptron}
+    \Title{On-line Recognition of Handwritten Mathematical Symbols}
+    \Author{Martin Thoma, Kevin Kilgour, Sebastian St{\"u}ker and Alexander Waibel}
+    \Org{Institute for Anthropomatics and Robotics}
+    \Doi{}
+\end{filecontents*}
+
+\RequirePackage{ifpdf}
+\ifpdf \PassOptionsToPackage{pdfpagelabels}{hyperref} \fi
+\RequirePackage{hyperref}
+\usepackage{parskip}
+\usepackage[pdftex,final]{graphicx}
+\usepackage{csquotes}
+\usepackage{braket}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\usepackage{wasysym}
+\usepackage{caption}
+% \captionsetup{belowskip=12pt,aboveskip=4pt}
+\makeatletter
+\newcommand\mynobreakpar{\par\nobreak\@afterheading}
+\makeatother
+\usepackage[noadjust]{cite}
+\usepackage[nameinlink,noabbrev]{cleveref} % has to be after hyperref, ntheorem, amsthm
+\usepackage[binary-units,group-separator={,}]{siunitx}
+\sisetup{per-mode=fraction,binary-units=true}
+\DeclareSIUnit\pixel{px}
+\usepackage{glossaries}
+\loadglsentries[main]{glossary}
+\makeglossaries
+
+\title{On-line Recognition of Handwritten Mathematical Symbols}
+\author{Martin Thoma, Marvin Teichmann, Sebastian Bittel, Vitali Kaiser}
+
+\hypersetup{
+  pdfauthor   = {Martin Thoma\sep Marvin Teichmann\sep Sebastian Bittel\sep Vitali Kaiser},
+  pdfkeywords = {recognition\sep machine learning\sep neural networks\sep classification\sep multilayer perceptron\sep deep learning},
+  pdfsubject  = {Recognition},
+  pdftitle    = {Pixel-wise segmentation of street with Neural Networks},
+}
+\crefname{table}{Table}{Tables}
+\crefname{figure}{Figure}{Figures}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\begin{abstract}
+Bla bla TODO
+\end{abstract}
+
+\input{ch1-introduction}
+\input{ch2-related-work}
+\input{ch3-datasets}
+\input{ch4-our-model}
+\input{ch5-frameworks}
+\input{ch5-sst}
+\input{ch7-results}
+\input{ch8-discussion}
+
+
+\bibliographystyle{IEEEtranSA}
+\bibliography{pixel-wise-street-segmentation}
+\end{document}
