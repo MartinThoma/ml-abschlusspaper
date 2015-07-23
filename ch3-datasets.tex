@@ -3,3 +3,17 @@
 \section{Datasets}\label{sec:datasets}
 The KITTI Road Estimation dataset \cite{Fritsch2013} was used for training
 of the models and for evaluation.
+
+The left color image base kit contains a training and a test set. All photos
+are in an urban environment. The training set has 95 photos with land markings
+(um), 96 photos with multiple lane markings (umm) and 98 photos where the
+street has no lane markings (uu). The test set has 96 um photos, 94 umm photos
+and 100 uu photos.
+
+The width of all photos is in $\Set{1226, 1238, 1241, 1242}$, the height is in
+$\Set{370, 374, 375, 376}$.
+
+The data photos are given as 8-bit color RGB PNG files. The labels (ground
+truth) are given as images of the same size as the data image, but with only
+three colors: red (\verb+#ff0000+), magenta (\verb+#ff00ff+) for street and
+black (\verb+#000000+) for other streets than the one the car is on. (TODO)
