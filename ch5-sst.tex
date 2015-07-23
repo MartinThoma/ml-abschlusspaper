@@ -1,10 +1,35 @@
 %!TEX root = pixel-wise-street-segmentation.tex
 
-\section{SST}\label{sec:SST}
-\Gls{SST} is a Python package hosted on \gls{PyPI} and developed on GitHub. It
+\section{SST}\label{sec:sst}
+\Gls{sst} is a Python package hosted on \gls{PyPI} and developed on GitHub. It
 makes use of Lasagne (see \cref{sec:frameworks}).
 
-It can be installed via \verb+pip install sst+. To make the installation as
-simple as possible, this does not install all requirements.
+\subsection{Installation}
+\verb+sst+ can be installed via \verb+pip install sst+. To make the
+installation as simple as possible, this does not install all requirements.
 \verb+sst selfcheck+ gives the user the possibility to check which packages
 are still required and manually install them.
+
+\subsection{Functionality}
+\verb+sst+ makes use of Python files for new neural network definitions. Those
+models have to have a \verb+generate_nnet(feature_vectors)+ function which
+returns an object with a \verb+fit(features, labels)+ method, a
+\verb+predict(feature_vector)+ method and a
+\verb+predict_proba(feature_vector)+ method. This is typically achieved by
+returning a \verb+nolearn+ model object. The Python network definition file
+has to have two global variables: \verb+patch_size+ (a positive integer) and
+\verb+fully+ (a boolean).
+
+\verb+sst --help+ shows all subcommands. The subcommands are
+
+\begin{itemize}
+    \item \verb+selfcheck+: Test which components are missing / have to be
+          installed to be able to use all features of \verb+sst+.
+    \item \verb+train+: Train a new network.
+    \item \verb+eval+: Evaluate a trained network on a new photograph and also
+          generate an overlay of the segmentation and the data photograph.
+    \item \verb+serve+: Start a web server which lets the user choose images
+          from the local file system to predict the label and to show overlays.
+    \item \verb+view+: Show all information about an existing model.
+    \item \verb+video+: Generate a video.
+\end{itemize}
