@@ -14,16 +14,47 @@ In the following we will have a more precise look at the parameters and results 
 
 For the following evaluation we used a computer with:
 \begin{itemize}
-\item Geforce ... 4GB Ram
-\item 16 GB
-\item intel ...
+\item Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
+\item System memory 16 GiB
+\item GeForce GTX 980 4GiB Ram
 \end{itemize}
 
 Runtime
-
+      \begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{c|ccc}
+    \toprule
+      \textbf{Netztyp/Stride} & \textbf{10} & \textbf{37} & \textbf{51} \\
+     \midrule
+      \textbf{Regression} & 1.99 & 0.29 & 0.18 \\
+      \textbf{Klassifikation} & 1.83 & 0.2 & 0.11\\
+      \bottomrule
+    \end{tabular}
+        \caption{Ausf\"uhrungszeit pro Bild (621x188 Pixel) in Sekunden.}
+  \end{center}
+\end{table}
 
 perfomance
-
+      \begin{table}[h!]
+  \begin{center}
+   % \caption{Caption for the table.}
+    \label{tab:table1}
+    \begin{tabular}{c|ccccc}
+    \toprule
+      \textbf{Netztyp} & \textbf{TN} & \textbf{FP} & \textbf{FN} & \textbf{TP} & \textbf{ACC} \\
+       \midrule
+      \textbf{Reg. - Stride 10} & 0.977 & 0.022 & 0.197 & 0.802 & 0.947\\
+      \textbf{Reg. - Stride 37} & 0.973 & 0.026 & 0.176 & 0.823 &  \textcolor{red}{0.948}\\ 
+      \textbf{Reg. - Stride 51} & 0.969 & 0.030 & 0.165 & \textcolor{red}{0.834} & 0.946\\
+      \midrule
+      \textbf{Kla. - Stride 10} & 0.981 & 0.018 & 0.241 & 0.758 & 0.942\\
+      \textbf{Kla. - Stride 37} & 0.959 & 0.040 & 0.212 & 0.787 & 0.929\\
+      \textbf{Kla. - Stride 51} & \textcolor{red}{0.982} & 0.017 & 0.451 & 0.548 & 0.906\\
+      \bottomrule
+    \end{tabular}
+    \caption{Ergebnisse der verschiedene neuronalen Netze auf Testset (58 Bilder, ~ 6,7 Mil. Pixel)}
+  \end{center}
+\end{table}
 
 kitty perforamnce
 
