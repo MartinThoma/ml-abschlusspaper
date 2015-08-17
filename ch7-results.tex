@@ -2,12 +2,16 @@
 
 \section{Evaluation}\label{sec:evaluation}
 
-As already stated is the KITTI Road Estimation dataset the basis for our evaluation. As the ground truth is only given for the the training data set we splitt it 20 to 80 in order to prove our performance. Besides that we hand it in to the KITTI offical evalluation.
+In the following section we will discuss the results of our approach. First, we will compare our different approaches with each other and then finally we will compare our best approach to stanfrodpaper work (which is ranked on place 1 at KITTI road segmentation).
+As already stated, the KITTI Road Estimation dataset the basis for our evaluation.
 
-Working with neural networks we figured out that there are a lot of parameters which need to be taken care of. Firstly we evaluated different once considering run time and performance.
+When we where conducting the first steps of our evaluation we only worked on the training data of the KITTI data set.
 
-On the one hand we have parameters not really affecting the neural network, like patch size, different image size(training testing) and on the other side
-we have filter-size number of neural layers and so on.
+As the ground truth is only given for the training data set we split it 20 to 80(test/training)in order to be able to measure our performance. SO we compareds
+Finally we used the KITTI official evaluation side [link to webside].
+
+Working with our neural networks we realised that there are a lot of parameters which need to be taken care of. Firstly we evaluated different once considering run time and performance.
+On the one hand we have parameters not really affecting the neural network, like patch size, different image size(training testing) and on the other side we have filter-size number of neural layers and so on.
 So based on this we figured out the best combination on our training set and then handed it in the KITTI evaluation.
 
 In the following we will have a more precise look at the parameters and results of our neural networks.
@@ -56,7 +60,9 @@ perfomance
   \end{center}
 \end{table}
 
-\textbf{kitty performance!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}
+\textbf{kitti performance!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}
+In the following we will look more closely at our results and differ between the different road types (UM, UMM, UU, URBAN).
+
       \begin{table}[h!]
   \begin{center}
 \begin{tabular}{c | c | c | c | c | c | c}
