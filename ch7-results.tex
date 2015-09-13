@@ -18,7 +18,7 @@ We used a computer with these specifications for the evaluation the GPU was used
 \end{itemize}
 
 Table \ref{tab:ownapproach} shows the result of our evaluation and regression approach using the models and parameters as described in section [MODEL]. The used score is the F1-measure \ref{eq:fMeasure} which is also used for the KITTI evaluation.
-The table also shows the values of true positive (TP), true negative, false positive (FP), false negative (FN) and accuracy (ACC) \ref{eq:accuracy} with the red coloured number being the best one in this column. This gives a better insights if pixels tend to be more wrongly correct or false classified . It shows clearly that the regressions has an overall better F1-measure and accuracy score than the classification approach. Surprisingly a smaller stride does not automatically lead to a better performance. In the classification approach a stride with the size of 37 gets the best result while in the regression based approach a stride of 51 (patch size) achieves the best performance. Unfortunately the ram of the graphic card limited our possibility to use larger patch sizes. This could have been a good way to train and evaluate on full image size and still keep our time constraint\\
+The table also shows the values of true positive (TP), true negative (TN), false positive (FP), false negative (FN) and accuracy (ACC) \ref{eq:accuracy} with the red coloured number being the best one in this column. This gives a better insights if pixels tend to be more wrongly correct or false classified . It shows clearly that the regressions has an overall better F1-measure and accuracy score than the classification approach. Surprisingly a smaller stride does not automatically lead to a better performance. In the classification approach a stride with the size of 37 gets the best result while in the regression based approach a stride of 51 (patch size) achieves the best performance. Unfortunately the ram of the graphic card limited our possibility to use larger patch sizes. This could have been a good way to train and evaluate on full image size and still keep our time constraint\\
 
 \begin{equation} \label{eq:fMeasure}
 F1-measure = \frac{2*TP}{2TP +FP +FN}
@@ -47,7 +47,7 @@ accuracy = \frac{TP + TN}{TP + FP + TN + FN}
   \end{center}
 \end{table}
 
-To evaluate if we could meet our predefined goal (doing the classification in under 20 ms) we did a run time evaluation which is shown in table \ref{tab:runtime}. As expected the runtime increase with a lower stride size. The classification approach shows an overall faster run time as the regression. Finally, we managed to achieve a run time under 20 ms by using a stride of 51 in both approaches.
+To evaluate if we could meet our predefined goal (doing the classification in under 20 ms) we did a run time evaluation which is shown in table \ref{tab:runtime}. As expected the runtime increases with a smaller stride size. The classification approach shows an overall faster run time as the regression. Finally, we managed to achieve a run time under 20 ms by using a stride of 51 in both approaches.
 
 
 
@@ -67,21 +67,26 @@ To evaluate if we could meet our predefined goal (doing the classification in un
 \end{table}
 
 
-As the regression approach had the best performance and also met our time constraint we used it to evaluate the KITTI test set and submitted the results after a transformation into birds eye view (KITTI specifications). Table \ref{tab:kitti} shows the results which are split into the different road types (UM, UMM, UU, URBAN).
-Unfortunately our approach performs much worse on the official test set then on our own test set. Here the F1-measure score ranges between 0.564 and 0.797 while Mohan achieves on all road categories a F1-measure score over 0.9. The reason for this huge difference to might be: \\
-1.overfitting on our own test set data\\
-2. we specialised our models and also our patch size on images with half the original size the KITTI evaluation was done on full size images\\
-3. as seen in the following images {fig:badimages}
+As the regression approach had the best performance and also met our time constraint, we used it to evaluate the KITTI test set and submitted the results after a transformation into birds eye view (KITTI specifications). Table \ref{tab:kitti} shows the results which are split into the different road types (UM, UMM, UU, URBAN).
+Unfortunately our approach performs much worse on the official test set than on our own test set. Here the F1-measure score ranges between 0.564 and 0.797 while Mohan et Al achieves on all road categories a F1-measure score over 0.9. The reason for this huge difference to might be: \\
+
+\begin{enumerate}
+  \item Overfitting of the neural network on our own test data
+  \item Specialisation of our models on a patch size on images with half the original size (the KITTI evaluation is done on full size images
+  \item Visible in the two images of \ref{fig:sfig1} is an example of the worst performance on a part of the test image data. Basically more non street is classified as street and most of the street is not recognised as one. This could be due to the fact of shadow in on some parts of the street and bit different color of this particular street than most of the street our neural network has learned in the training. 
+  \end{enumerate}
+
+Finally \ref{fig:sfig2} gives some positives example where our nerual network did well. Hardly no false positive and street around the cars is nicly segmented
 
       \begin{table}[h!]
   \begin{center}
   \label{tab:kitti}
 \begin{tabular}{c|cccccc}
  {\bf Benchmark} & {\bf F1} & {\bf AP} & {\bf PRE} & {\bf REC} & {\bf FPR} & {\bf FNR}\\ \hline
-UM\_ROAD & 67.91 \% & 61.63 \% & 86.90 \% & 55.74 \% & 3.83 \% & 44.26 \%\\
-UMM\_ROAD & 79.67 \% & 78.41 \% & 93.29 \% & 69.51 \% & 5.50 \% & 30.49 \%\\
-UU\_ROAD & 56.48 \% & 51.89 \% & 84.67 \% & 42.37 \% & 2.50 \% & 57.63 \%\\
-URBAN\_ROAD & 71.10 \% & 65.14 \% & 89.83 \% & 58.84 \% & 3.67 \% & 41.16 \%\\
+UM & 67.91 \% & 61.63 \% & 86.90 \% & 55.74 \% & 3.83 \% & 44.26 \%\\
+UMM & 79.67 \% & 78.41 \% & 93.29 \% & 69.51 \% & 5.50 \% & 30.49 \%\\
+UU  & 56.48 \% & 51.89 \% & 84.67 \% & 42.37 \% & 2.50 \% & 57.63 \%\\
+URBAN & 71.10 \% & 65.14 \% & 89.83 \% & 58.84 \% & 3.67 \% & 41.16 \%\\
 \end{tabular}
   \end{center}
 \end{table}
@@ -89,12 +94,22 @@ URBAN\_ROAD & 71.10 \% & 65.14 \% & 89.83 \% & 58.84 \% & 3.67 \% & 41.16 \%\\
 
 
 
-\begin{figure}[p]
-    \centering
-    \includegraphics[scale=0.18]{figures/kitty_eval/Persp_um_road_000077.png}
-    \includegraphics[scale=0.18]{figures/kitty_eval/Persp_um_road_000095.png}
-    \caption{Here, red denotes false negatives, blue areas correspond to false positives and green represents true positives. }
-    \label{fig:badimages}
+\begin{figure}[h!]
+ \centering
+    \begin{subfigure}{\textwidth}
+ 
+     \includegraphics[scale=0.2]{figures/kitty_eval/Persp_um_road_000077.png}
+    \includegraphics[scale=0.2]{figures/kitty_eval/Persp_um_road_000095.png}
+  \label{fig:sfig1}
+      \caption{shows KITTI test data on which our neural net performed badly.Here, red denotes false negatives, blue areas correspond to false positives and green represents true positives.}
+\end{subfigure}
+\centering
+\begin{subfigure}{\textwidth}  
+    \includegraphics[scale=0.2]{figures/kitty_eval/Persp_uu_road_000027.png}
+	\includegraphics[scale=0.2]{figures/kitty_eval/Persp_uu_road_000082.png}
+    \caption{shows KITTI test data on which our neural net performed well.}
+  \label{fig:sfig2}
+\end{subfigure}
 \end{figure}
 
 
@@ -105,13 +120,7 @@ URBAN\_ROAD & 71.10 \% & 65.14 \% & 89.83 \% & 58.84 \% & 3.67 \% & 41.16 \%\\
 %\includegraphics[scale=0.2]{figures/kitty_eval/Persp_umm_road_000066.png}
 %\includegraphics[scale=0.2]{figures/kitty_eval/Persp_uu_road_000020.png}
 
-\begin{figure}[p]
-    \centering
-    \includegraphics[scale=0.2]{figures/kitty_eval/Persp_uu_road_000027.png}
-	\includegraphics[scale=0.2]{figures/kitty_eval/Persp_uu_road_000082.png}
-    \caption{Here, red denotes false negatives, blue areas correspond to false positives and green represents true positives. }
-    \label{fig:badimages}
-\end{figure}
+
 
 
 
