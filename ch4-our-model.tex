@@ -68,7 +68,7 @@ The main disadvantage of this approach is the impractical runtime. For a 1 mega-
 
 
 
-\begin{figure}[H]
+\begin{figure}[]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_sliding_stride10.png}
 	\caption{Using the sliding window approach with a stride of 10.}
@@ -132,6 +132,8 @@ Training of the regression model can be implemented analogously to the classific
 
 \subsubsection{Evaluation}
 
+Our initial goal was to use the regression approach on the whole image at once. 
+
 \begin{figure}[]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride51.png}
@@ -141,7 +143,7 @@ Training of the regression model can be implemented analogously to the classific
 
 
 
-\begin{figure}[]
+\begin{figure}[hbp]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride37.png}
 	\caption{Using regression approach with stride of 37}
