@@ -132,7 +132,7 @@ Training of the regression model can be implemented analogously to the classific
 
 \subsubsection{Evaluation}
 
-Our initial goal was to use the regression approach on the whole image at once. 
+In order to evaluate a whole image using the regression approach we divide the image into patches of size $n \times n$ and evaluate each patch individually. The output is shown in \Cref{fig:reg_stride2}. The result is quite impressive especially regarding the overall runtime of about $0.18$s. 
 
 \begin{figure}[]
 	\centering
@@ -142,12 +142,17 @@ Our initial goal was to use the regression approach on the whole image at once.
 \end{figure} 
 
 
+One observation is, that the segmentation works better in the center of each patch. Close to the border of each image section the neuronal network does not have good information. To overcome this problem we use an evaluation stride again. This introduces an overlap between each image patch. An pixel p is than segmented according to the patch whose center is closer to p.
 
-\begin{figure}[hbp]
+
+
+
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride37.png}
 	\caption{Using regression approach with stride of 37}
-	\label{fig:reg_stride10}
+	\label{fig:reg_stride37}
 \end{figure} 
 
-\subsection{Discussion}
+\Cref{fig:reg_stride37} shows the output when using a stride of 37. We see that the edge of the street is classified slightly better. To get this effect already a big stride between 37 and 47 is sufficient. In the regression approach there is no measurable benefit of using strides below 37.  
+
