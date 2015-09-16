@@ -7,8 +7,10 @@ used Caffe~\cite{Jia2014} for \glspl{CNN}, but skipped that approach as the
 framework crashed very often for different training approaches without giving
 meaningful error messages.
 
-Theano is a Python library which allows symbolic computation of derivatives as
+Theano is a Python package which allows symbolic computation of derivatives as
 well as automatic generation of GPU code. This is used to calculate the weight
 update function for arbitrary feed-forward networks. Lasagne makes using Theano
-simpler by providing some basic layer types with their update function and
-nolearn adds some syntactic sugar.
+simpler by providing some basic layer types like fully connected layers,
+convolutional layers and pooling layers with their update function. nolearn
+adds some syntactic sugar and neural network objects with a similar interface
+as the \verb+scikit-learn+ package uses for its classifiers~\cite{scikit-learn}.
