@@ -4,7 +4,7 @@
 
 In the following section we will discuss the evaluation and results of our approaches. First, we will evaluate our different approaches. Second, we will compare our best one to the work of Mohan [~\cite{Tarel2009}]  (which is ranked on place 1 at KITTI road segmentation [~\cite{Tarel2009}]).
 As already stated, the KITTI Road Estimation dataset the basis for our evaluation.\\
-To be able to try out and evaluate our different approaches we used only the training data of the KITTI data set, as the ground truth for the test data is not publicly available. We splitted the training data beforehand 20 to 80 (test/training) in order to be able to measure our performance. 
+To be able to try out and evaluate our different approaches we used only the training data of the KITTI data set, as the ground truth for the test data is not publicly available. We splitted the training data beforehand 20 to 80 (test/training) in order to be able to measure our performance.
 Our best approaches with the parameter which worked best we submitted on the KITTI official evaluation website [link to website]
 
 
@@ -21,10 +21,10 @@ We used a computer with these specifications for the evaluation the GPU was used
 	\begin{center}
 		\begin{tabular}{c|cccccc}
 			\toprule
-			\textbf{Netztyp} & {\bf F1} & \textbf{TN} & \textbf{FP} & \textbf{FN} & \textbf{TP} & \textbf{ACC} \\
+			\textbf{Net type} & {\bf $\mathbf{F_1}$} & \textbf{TN} & \textbf{FP} & \textbf{FN} & \textbf{TP} & \textbf{ACC} \\
 			\midrule
 			\textbf{Reg. - Stride 10} & 0.880 & 0.977 & 0.022 & 0.197 & 0.802 & 0.947\\
-			\textbf{Reg. - Stride 37} & 0.890 & 0.973 & 0.026 & 0.176 & 0.823 &  \textcolor{red}{0.948}\\ 
+			\textbf{Reg. - Stride 37} & 0.890 & 0.973 & 0.026 & 0.176 & 0.823 &  \textcolor{red}{0.948}\\
 			\textbf{Reg. - Stride 51} & \textcolor{red}{0.895} & 0.969 & 0.030 & 0.165 & \textcolor{red}{0.834} & 0.946\\
 			\midrule
 			\textbf{Kla. - Stride 10} & 0.854 & 0.981 & 0.018 & 0.241 & 0.758 & 0.942\\
@@ -37,14 +37,14 @@ We used a computer with these specifications for the evaluation the GPU was used
 	\end{center}
 \end{table}
 
-\Cref{tab:ownapproach} shows the result of our evaluation and regression approach using the models and parameters as described in section [MODEL]. The used score is the F1-measure \ref{eq:fMeasure} which is also used for the KITTI evaluation.
-The table also shows the values of true positive (TP), true negative (TN), false positive (FP), false negative (FN) and accuracy (ACC) \ref{eq:accuracy} with the red coloured number being the best one in this column. This gives a better insights if pixels tend to be more wrongly correct or false classified . It shows clearly that the regressions has an overall better F1-measure and accuracy score than the classification approach. Surprisingly a smaller stride does not automatically lead to a better performance. In the classification approach a stride with the size of 37 gets the best result while in the regression based approach a stride of 51 (patch size) achieves the best performance. Unfortunately the ram of the graphic card limited our possibility to use larger patch sizes. This could have been a good way to train and evaluate on full image size and still keep our time constraint\\
+\Cref{tab:ownapproach} shows the result of our evaluation and regression approach using the models and parameters as described in section [MODEL]. The used score is the $F_1$-measure \ref{eq:fMeasure} which is also used for the KITTI evaluation.
+The table also shows the values of true positive (TP), true negative (TN), false positive (FP), false negative (FN) and accuracy (ACC) \ref{eq:accuracy} with the red coloured number being the best one in this column. This gives a better insights if pixels tend to be more wrongly correct or false classified . It shows clearly that the regressions has an overall better $F_1$-measure and accuracy score than the classification approach. Surprisingly a smaller stride does not automatically lead to a better performance. In the classification approach a stride with the size of 37 gets the best result while in the regression based approach a stride of 51 (patch size) achieves the best performance. Unfortunately the ram of the graphic card limited our possibility to use larger patch sizes. This could have been a good way to train and evaluate on full image size and still keep our time constraint\\
 
 \begin{equation} \label{eq:fMeasure}
-F1-measure = \frac{2*TP}{2TP +FP +FN}
+F_1-\text{measure} = \frac{2 \cdot TP}{2TP +FP +FN}
 \end{equation}
 \begin{equation} \label{eq:accuracy}
-accuracy = \frac{TP + TN}{TP + FP + TN + FN}
+\text{accuracy} = \frac{TP + TN}{TP + FP + TN + FN}
 \end{equation}
 
  \begin{table}[]
@@ -57,48 +57,48 @@ accuracy = \frac{TP + TN}{TP + FP + TN + FN}
  			\textbf{classification} & 1.83 & 0.2 & 0.11\\
  			\bottomrule
  		\end{tabular}
- 		\caption{Runtime per image (621x188 pixel) in seconds.}
+ 		\caption{Runtime per image ($621 \times 188$ pixel) in seconds.}
  		\label{tab:runtime}
  	\end{center}
  \end{table}
- 
+
   \begin{figure*}[]
   	\begin{subfigure}[t]{\columnwidth}
-  		
+
   		\includegraphics[width=\columnwidth]{figures/kitty_eval/Persp_um_road_000077.png}
   		\includegraphics[width=\columnwidth]{figures/kitty_eval/Persp_um_road_000095.png}
-  		\caption{shows KITTI test data on which our neural net performed badly.Here, red denotes false negatives, blue areas correspond to false positives and green represents true positives.}
+  		\caption{shows KITTI test data on which our neural net performed badly. Here, red denotes false negatives, blue areas correspond to false positives and green represents true positives.}
   		\label{fig:sfig1}
   	\end{subfigure}
-  	\begin{subfigure}[t]{\columnwidth}  
+  	\begin{subfigure}[t]{\columnwidth}
   		\includegraphics[width=\columnwidth]{figures/kitty_eval/Persp_uu_road_000027.png}
   		\includegraphics[width=\columnwidth]{figures/kitty_eval/Persp_uu_road_000082.png}
   		\caption{shows KITTI test data on which our neural net performed well.}
   		\label{fig:sfig2}
   	\end{subfigure}
   \end{figure*}
-  
- 
- 
- 
- 
+
+
+
+
+
  \begin{table*}[]
  	\begin{center}
  		\begin{tabular}{c|cccccc}
- 			{\bf Benchmark} & {\bf F1} & {\bf AP} & {\bf PRE} & {\bf REC} & {\bf FPR} & {\bf FNR}\\ \hline
+ 			{\bf Benchmark} & {\bf $\mathbf{F_1}$} & {\bf AP} & {\bf PRE} & {\bf REC} & {\bf FPR} & {\bf FNR}\\ \hline
  			UM & 67.91 \% & 61.63 \% & 86.90 \% & 55.74 \% & 3.83 \% & 44.26 \%\\
  			UMM & 79.67 \% & 78.41 \% & 93.29 \% & 69.51 \% & 5.50 \% & 30.49 \%\\
  			UU  & 56.48 \% & 51.89 \% & 84.67 \% & 42.37 \% & 2.50 \% & 57.63 \%\\
  			URBAN & 71.10 \% & 65.14 \% & 89.83 \% & 58.84 \% & 3.67 \% & 41.16 \%\\
  		\end{tabular}
  	\end{center}
- 	 		\caption{Write some caption!}
+ 	 		\caption{TODO: Write some caption!}
  	 		\label{tab:kitti}
  \end{table*}
- 
- 
 
- 
+
+
+
 
 
 
@@ -109,15 +109,15 @@ To evaluate if we could meet our predefined goal (doing the classification in un
 
 
 As the regression approach had the best performance and also met our time constraint, we used it to evaluate the KITTI test set and submitted the results after a transformation into birds eye view (KITTI specifications).\Cref{tab:kitti} shows the results which are split into the different road types (UM, UMM, UU, URBAN).
-Unfortunately our approach performs much worse on the official test set than on our own test set. Here the F1-measure score ranges between 0.564 and 0.797 while Mohan et Al achieves on all road categories a F1-measure score over 0.9. The reason for this huge difference to might be: \\
+Unfortunately our approach performs much worse on the official test set than on our own test set. Here the $F_1$-measure score ranges between 0.564 and 0.797 while Mohan et Al achieves on all road categories a $F_1$-measure score over 0.9. The reason for this huge difference to might be: \\
 
 \begin{enumerate}
   \item Overfitting of the neural network on our own test data
   \item Specialisation of our models on a patch size on images with half the original size (the KITTI evaluation is done on full size images
-  \item Visible in the two images of \ref{fig:sfig1} is an example of the worst performance on a part of the test image data. Basically more non street is classified as street and most of the street is not recognised as one. This could be due to the fact of shadow in on some parts of the street and bit different color of this particular street than most of the street our neural network has learned in the training. 
+  \item Visible in the two images of \ref{fig:sfig1} is an example of the worst performance on a part of the test image data. Basically more non street is classified as street and most of the street is not recognized as one. This could be due to the fact of shadow in on some parts of the street and bit different color of this particular street than most of the street our neural network has learned in the training.
   \end{enumerate}
 
-Finally \ref{fig:sfig2} gives some positives example where our nerual network did well. Hardly no false positive and street around the cars is nicly segmented
+Finally \ref{fig:sfig2} gives some positives example where our neural network did well. Hardly no false positive and street around the cars is nicely segmented
 
 
 
