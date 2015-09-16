@@ -18,7 +18,7 @@ We trained a neural network to solve the following binary classification problem
 	\end{tabular}
 }
 
-For $n$ we used $51$. This constant was choosen as we ran into gpu memory problems when training on higher values of $n$. Our classification approach is visualized in \cref{fig:figure}.
+For $n$ we used $51$. This constant was choosen as we ran into GPU memory problems when training on higher values of $n$. Our classification approach is visualized in \cref{fig:figure}.
 
 \begin{figure}[H]
 	\centering
@@ -59,7 +59,7 @@ topology.
 
 \subsubsection{Training}
 
-The training data for this classification problem can be easily obtained by modifying the original training data. One advantage of our approach is, that we get a lot of training data out of each image. In theory we get one (distinct) datum for each pixel in each training image. However, it is not useful to actually use all of this data as patches which are close to each other are very similar.Hence the information gain of including these patches is very small. On the other hand if we generate an image section for each pixel we obtain more data than the memory of our gpu can handle. We therefore introduced a training stride. A stride of $s$ results in the center pixels having a distance of s in height and with to the next sections center pixel. This is important in the section generation step before training as well as for the pixel-wise classification. The overlap of two adjacent image is hence reduced to $n-s$, where $n \times n$ is the size of each image section. Empirical evaluations indicated that $s=10$ is a good default value for the trainings stride.
+The training data for this classification problem can be easily obtained by modifying the original training data. One advantage of our approach is, that we get a lot of training data out of each image. In theory we get one (distinct) datum for each pixel in each training image. However, it is not useful to actually use all of this data as patches which are close to each other are very similar.Hence the information gain of including these patches is very small. On the other hand if we generate an image section for each pixel we obtain more data than the memory of our GPU can handle. We therefore introduced a training stride. A stride of $s$ results in the center pixels having a distance of s in height and with to the next sections center pixel. This is important in the section generation step before training as well as for the pixel-wise classification. The overlap of two adjacent image is hence reduced to $n-s$, where $n \times n$ is the size of each image section. Empirical evaluations indicated that $s=10$ is a good default value for the trainings stride.
 
 
 
@@ -78,7 +78,7 @@ The main disadvantage of this approach is the impractical runtime. For a 1 megap
 
 
 
-\begin{figure}[]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_sliding_stride10.png}
 	\caption{Using the sliding window approach with a stride of $s=10$.}
@@ -160,7 +160,7 @@ One observation is, that the segmentation works better in the center of each pat
 
 
 
-\begin{figure}[H]
+\begin{figure}[]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride37.png}
 	\caption{Using regression approach with stride $s=37$}
