@@ -1,14 +1,14 @@
 %!TEX root = pixel-wise-street-segmentation.tex
 
-\section{Evaluation}\label{sec:evaluation}
+\section{Experimental Results}\label{sec:evaluation}
 
-In the following section we will discuss the evaluation and results of our approaches. First, we will evaluate our different approaches. Second, we will compare our best one to the work of Mohan [~\cite{Tarel2009}]  (which is ranked on place 1 at KITTI road segmentation [~\cite{Tarel2009}]).
+In the following section we will discuss the evaluation and results of our approaches. First, we will evaluate our different approaches. Second, we will compare our best one to the work of Mohan~\cite{Tarel2009} (which is ranked on place~1 at KITTI road segmentation~\cite{Tarel2009}).
 As already stated, the KITTI Road Estimation dataset the basis for our evaluation.\\
 To be able to try out and evaluate our different approaches we used only the training data of the KITTI data set, as the ground truth for the test data is not publicly available. We splitted the training data beforehand 20 to 80 (test/training) in order to be able to measure our performance.
 Our best approaches with the parameter which worked best we submitted on the KITTI official evaluation website [link to website]
 
 
-Our personal goal was to achieve an adequate classification performance while staying within a time frame of \textbf{20 ms} as maximal classification time per image. Resulting in a possible real time application usability of our approach, which would be the use case for street classification in autonomous cars anyway.\\
+Our personal goal was to achieve an adequate classification performance while staying within a time frame of \textbf{\SI{20}{\milli\second}} as maximal classification time per image. Resulting in a possible real time application usability of our approach, which would be the use case for street classification in autonomous cars anyway.\\
 
 We used a computer with these specifications for the evaluation the GPU was used for training and testing):
 \begin{itemize}
@@ -37,8 +37,22 @@ We used a computer with these specifications for the evaluation the GPU was used
 	\end{center}
 \end{table}
 
-\Cref{tab:ownapproach} shows the result of our evaluation and regression approach using the models and parameters as described in section [MODEL]. The used score is the $F_1$-measure \ref{eq:fMeasure} which is also used for the KITTI evaluation.
-The table also shows the values of true positive (TP), true negative (TN), false positive (FP), false negative (FN) and accuracy (ACC) \ref{eq:accuracy} with the red coloured number being the best one in this column. This gives a better insights if pixels tend to be more wrongly correct or false classified . It shows clearly that the regressions has an overall better $F_1$-measure and accuracy score than the classification approach. Surprisingly a smaller stride does not automatically lead to a better performance. In the classification approach a stride with the size of 37 gets the best result while in the regression based approach a stride of 51 (patch size) achieves the best performance. Unfortunately the ram of the graphic card limited our possibility to use larger patch sizes. This could have been a good way to train and evaluate on full image size and still keep our time constraint\\
+\Cref{tab:ownapproach} shows the result of our evaluation and regression
+approach using the models and parameters as described in \cref{sec:model}. The
+used score is the $F_1$-measure \cref{eq:fMeasure} which is also used for the
+KITTI evaluation. The table also shows the values of true positive (TP), true
+negative (TN), false positive (FP), false negative (FN) and accuracy (ACC)
+\cref{eq:accuracy} with the red coloured number being the best one in this
+column. This gives a better insights if pixels tend to be more wrongly correct
+or false classified . It shows clearly that the regressions has an overall
+better $F_1$-measure and accuracy score than the classification approach.
+Surprisingly a smaller stride does not automatically lead to a better
+performance. In the classification approach a stride with the size of 37 gets
+the best result while in the regression based approach a stride of 51 (patch
+size) achieves the best performance. Unfortunately the ram of the graphic card
+limited our possibility to use larger patch sizes. This could have been a good
+way to train and evaluate on full image size and still keep our time
+constraint\\
 
 \begin{equation} \label{eq:fMeasure}
 F_1-\text{measure} = \frac{2 \cdot TP}{2TP +FP +FN}
@@ -114,10 +128,10 @@ Unfortunately our approach performs much worse on the official test set than on 
 \begin{enumerate}
   \item Overfitting of the neural network on our own test data
   \item Specialisation of our models on a patch size on images with half the original size (the KITTI evaluation is done on full size images
-  \item Visible in the two images of \ref{fig:sfig1} is an example of the worst performance on a part of the test image data. Basically more non street is classified as street and most of the street is not recognized as one. This could be due to the fact of shadow in on some parts of the street and bit different color of this particular street than most of the street our neural network has learned in the training.
+  \item Visible in the two images of \cref{fig:sfig1} is an example of the worst performance on a part of the test image data. Basically more non street is classified as street and most of the street is not recognized as one. This could be due to the fact of shadow in on some parts of the street and bit different color of this particular street than most of the street our neural network has learned in the training.
   \end{enumerate}
 
-Finally \ref{fig:sfig2} gives some positives example where our neural network did well. Hardly no false positive and street around the cars is nicely segmented
+Finally \cref{fig:sfig2} gives some positives example where our neural network did well. Hardly no false positive and street around the cars is nicely segmented
 
 
 

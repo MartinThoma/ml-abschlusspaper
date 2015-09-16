@@ -16,27 +16,34 @@ We trained a neuronal network to solve the following binary classification probl
 		\textit{Input:} & A $n \times n$ 3-channel pixel image section.\\
 		\textit{Output:} & Decide whether the center pixel is street.
 	\end{tabular}
-} 
+}
 
-For $n$ we used $51$. This constant was choosen as we ran into gpu memory problems when training on higher values of $n$. Our classification approach is visualized in Fig. \ref{fig:figure}.
+For $n$ we used $51$. This constant was choosen as we ran into gpu memory problems when training on higher values of $n$. Our classification approach is visualized in \cref{fig:figure}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\columnwidth]{figures/models/sliding_window.png}
 	\caption{Visualisation of the classification problem solved by our neuronal network.}
 	\label{fig:figure}
-\end{figure} 
+\end{figure}
+
 
 \subsubsection{Net Topology}
-
-
-The problem defined above can be tackled with any of the well known classification Net such as GoogleNet or Alexnet. For our solution we design our own Network detailed in \Cref{tab:topo}. With three hidden layers our Network is rather small. Our experiments shows that this small networks performs better than networks with more layers. One reason for this is that bigger networks are more vulnerable to overfitting. Hence with our limited amount of distinct data a smaller net will generalize much better. Secondly the binary decision task of recognizing street is much simpler than detailed image classification. This simplicity will also reflect in the net topology.
+The problem defined above can be tackled with any of the well known
+classification Net such as GoogleNet or Alexnet. For our solution we design our
+own Network detailed in \Cref{tab:topo}. With three hidden layers our Network
+is rather small. Our experiments shows that this small networks performs better
+than networks with more layers. One reason for this is that the amount of
+labeled images is rather small. Hence smaller nets will generalize much better.
+Secondly the binary decision task of recognizing street is much simpler than
+detailed image classification. This simplicity will also reflect in the net
+topology.
 
 \begin{table}[H]
 	\normalsize
 	\centering
 \begin{tabular}{r l l}
-	Layer & Type  & Shape  \\
+	\textbf{Layer} & \textbf{Type}  & \textbf{Shape}  \\
 	0     & Input &  $51 \times 51 \times 3$ \\
 	1     & Convolution & 10 filter  each $5 \times 5$ \\
 	2     & Convolution & 10 filter  each $5 \times 5$  \\
@@ -45,7 +52,7 @@ The problem defined above can be tackled with any of the well known classificati
 \end{tabular}
 \caption{Topology of our Classification Net}
 \label{tab:topo}
-\end{table} 
+\end{table}
 
 \subsubsection{Training}
 
@@ -62,7 +69,7 @@ In order to apply a classification Net on the segmentation problem we used the w
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_sliding_stride2.png}
 	\caption{Using the sliding window approach with a stride of 2.}
 	\label{fig:stride2}
-\end{figure} 
+\end{figure}
 
 The main disadvantage of this approach is the impractical runtime. For a 1 mega-pixel image we need to run 1 million classifications. This leads to a runtime of almost 2 minutes with our hardware. In order to reduce the evaluation time we introduced an evaluation stride s. Similar to the training stride we skip s-1 pixel in each dimension. This increases the evaluation speed by a factor of $s^2$. For the sliding window approach we found that a stride of $s = 10$ is a reasonable trade-off between speed and quality. \Cref{fig:stride10} shows the result of the sliding window approach with a stride of 10.
 
@@ -73,7 +80,7 @@ The main disadvantage of this approach is the impractical runtime. For a 1 mega-
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_sliding_stride10.png}
 	\caption{Using the sliding window approach with a stride of 10.}
 	\label{fig:stride10}
-\end{figure} 
+\end{figure}
 
 
 \subsection{The Regression Approach}
@@ -90,7 +97,7 @@ We trained a neuronal network to solve the following regression problem:
 		\textit{Input:} & A $n \times n$ 3-channel pixel image section.\\
 		\textit{Output:} & A $n \times n$ label.
 	\end{tabular}
-} 
+}
 
 where the net is trained to minimize the mean squared error of the output. The output of the regression net is continuous. We round the output to obtain a binary classification.  \Cref{fig:reg} visualizes our regression approach.
 
@@ -99,7 +106,7 @@ where the net is trained to minimize the mean squared error of the output. The o
 	\includegraphics[width=0.5\columnwidth]{figures/models/fully-conv.png}
 	\caption{Visualisation of the regression approach.}
 	\label{fig:reg}
-\end{figure} 
+\end{figure}
 
 Our goal is to choose $n$ as big as possible as $n^2$ is the number of pixel which can be classified at once. However due to GPU memory limitations we can not train a network with $n > 51$.
 
@@ -124,7 +131,7 @@ Similar to the classification approach our experiments show that a simple net to
 	\end{tabular}
 	\caption{Topology of our Regression Net}
 	\label{tab:topo2}
-\end{table} 
+\end{table}
 
 \subsubsection{Training}
 
@@ -132,14 +139,14 @@ Training of the regression model can be implemented analogously to the classific
 
 \subsubsection{Evaluation}
 
-In order to evaluate a whole image using the regression approach we divide the image into patches of size $n \times n$ and evaluate each patch individually. The output is shown in \Cref{fig:reg_stride2}. The result is quite impressive especially regarding the overall runtime of about $0.18$s. 
+In order to evaluate a whole image using the regression approach we divide the image into patches of size $n \times n$ and evaluate each patch individually. The output is shown in \Cref{fig:reg_stride2}. The result is quite impressive especially regarding the overall runtime of about $0.18$s.
 
 \begin{figure}[]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride51.png}
 	\caption{Using regression approach with stride of 51}
 	\label{fig:reg_stride2}
-\end{figure} 
+\end{figure}
 
 
 One observation is, that the segmentation works better in the center of each patch. Close to the border of each image section the neuronal network does not have good information. To overcome this problem we use an evaluation stride again. This introduces an overlap between each image patch. An pixel p is than segmented according to the patch whose center is closer to p.
@@ -152,7 +159,7 @@ One observation is, that the segmentation works better in the center of each pat
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride37.png}
 	\caption{Using regression approach with stride of 37}
 	\label{fig:reg_stride37}
-\end{figure} 
+\end{figure}
 
-\Cref{fig:reg_stride37} shows the output when using a stride of 37. We see that the edge of the street is classified slightly better. To get this effect already a big stride between 37 and 47 is sufficient. In the regression approach there is no measurable benefit of using strides below 37.  
+\Cref{fig:reg_stride37} shows the output when using a stride of 37. We see that the edge of the street is classified slightly better. To get this effect already a big stride between 37 and 47 is sufficient. In the regression approach there is no measurable benefit of using strides below 37.
 
