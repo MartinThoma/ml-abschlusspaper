@@ -4,15 +4,15 @@
 
 \subsection{The Sliding Window Approach}
 
-Traditionally Neuronal Networks are used for Classification tasks and as discredited in the introduction they deliver impressive results. Our first approach is a sliding window model, which exploits the classification strength of deep neuronal networks.
+Traditionally neural networks are used for classification tasks and as discredited in the introduction they deliver impressive results. Our first approach is a sliding window model, which exploits the classification strength of deep neural networks.
 
 \subsubsection{Definition of the Classification Problem}
 
-We trained a neuronal network to solve the following binary classification problem:
+We trained a neural network to solve the following binary classification problem:
 
 \fbox{
 	\begin{tabular}{l l}
-		\multicolumn{2}{l}{Classification Problem} \\
+		\multicolumn{2}{l}{\textbf{Classification Problem}} \\
 		\textit{Input:} & A $n \times n$ 3-channel pixel image section.\\
 		\textit{Output:} & Decide whether the center pixel is street.
 	\end{tabular}
@@ -23,7 +23,7 @@ For $n$ we used $51$. This constant was choosen as we ran into gpu memory proble
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\columnwidth]{figures/models/sliding_window.png}
-	\caption{Visualisation of the classification problem solved by our neuronal network.}
+	\caption{Visualisation of the classification problem solved by our neural network.}
 	\label{fig:figure}
 \end{figure}
 
@@ -31,7 +31,7 @@ For $n$ we used $51$. This constant was choosen as we ran into gpu memory proble
 \subsubsection{Net Topology}
 The problem defined above can be tackled with any of the well known
 classification Net such as GoogleNet or Alexnet. For our solution we design our
-own Network detailed in \Cref{tab:topo}. With three hidden layers our Network
+own network detailed in \Cref{tab:topo}. With three hidden layers our network
 is rather small. Our experiments shows that this small networks performs better
 than networks with more layers. One reason for this is that the amount of
 labeled images is rather small. Hence smaller nets will generalize much better.
@@ -42,21 +42,24 @@ topology.
 \begin{table}[H]
 	\normalsize
 	\centering
-\begin{tabular}{r l l}
+\begin{tabular}{r  l l}
+	\toprule
 	\textbf{Layer} & \textbf{Type}  & \textbf{Shape}  \\
+	\midrule
 	0     & Input &  $51 \times 51 \times 3$ \\
 	1     & Convolution & 10 filter  each $5 \times 5$ \\
 	2     & Convolution & 10 filter  each $5 \times 5$  \\
 	3     & Pooling     & $2 \times 2$ \\
 	4     & Output     & $1$ \\
+	\bottomrule
 \end{tabular}
-\caption{Topology of our Classification Net}
+\caption{Topology of the Classification Network.}
 \label{tab:topo}
 \end{table}
 
 \subsubsection{Training}
 
-The training data for this classification problem can be easily obtained by modifying the original training data. One advantage of our approach is, that we get a lot of training data out of each image. In theory we get one (distinct) datum for each pixel in each training image. However it is not useful to actually use all of this data. Pixel which are close to each other deliver a very similar input as their is a high intersect in the corresponding input section. Hence the information gain of including this inputs are very small. On the other hand if we generate an image section for each pixel we obtain more data than the memory of our gpu can handle. We therefore introduced a training stride. If we set the stride to $s$ the center pixel selected for data generation have a distance of $s$ in each dimension to its nearest neighbour. The overlap of two adjacent image is hence reduced to $n-s$, where $n \times n$ is the size of each image section. Empirical evaluations indicated that $s=10$ is a good default value for the trainings stride.
+The training data for this classification problem can be easily obtained by modifying the original training data. One advantage of our approach is, that we get a lot of training data out of each image. In theory we get one (distinct) datum for each pixel in each training image. However, it is not useful to actually use all of this data as patches which are close to each other are very similar.Hence the information gain of including these patches is very small. On the other hand if we generate an image section for each pixel we obtain more data than the memory of our gpu can handle. We therefore introduced a training stride. A stride of $s$ results in the center pixels having a distance of s in height and with to the next sections center pixel. This is important in the section generation step before training as well as for the pixel-wise classification. The overlap of two adjacent image is hence reduced to $n-s$, where $n \times n$ is the size of each image section. Empirical evaluations indicated that $s=10$ is a good default value for the trainings stride.
 
 
 
@@ -67,33 +70,33 @@ In order to apply a classification Net on the segmentation problem we used the w
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_sliding_stride2.png}
-	\caption{Using the sliding window approach with a stride of 2.}
+	\caption{Using the sliding window approach with a stride $s=2$.}
 	\label{fig:stride2}
 \end{figure}
 
-The main disadvantage of this approach is the impractical runtime. For a 1 mega-pixel image we need to run 1 million classifications. This leads to a runtime of almost 2 minutes with our hardware. In order to reduce the evaluation time we introduced an evaluation stride s. Similar to the training stride we skip s-1 pixel in each dimension. This increases the evaluation speed by a factor of $s^2$. For the sliding window approach we found that a stride of $s = 10$ is a reasonable trade-off between speed and quality. \Cref{fig:stride10} shows the result of the sliding window approach with a stride of 10.
+The main disadvantage of this approach is the impractical runtime. For a 1 megapixel image we need to run 1 million classifications. This leads to a runtime of almost 2 minutes with our hardware. In order to reduce the evaluation time we introduced an evaluation stride $s$. Similar to the training stride we skip $s-1$ pixels in each dimension. This increases the evaluation speed by a factor of $s^2$. For the sliding window approach we found that a stride of $s = 10$ is a reasonable trade-off between speed and quality. \Cref{fig:stride10} shows the result of the sliding window approach with a stride $s=10$.
 
 
 
 \begin{figure}[]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_sliding_stride10.png}
-	\caption{Using the sliding window approach with a stride of 10.}
+	\caption{Using the sliding window approach with a stride of $s=10$.}
 	\label{fig:stride10}
 \end{figure}
 
 
 \subsection{The Regression Approach}
 
-The main disadvantage of our sliding window approach is that the segmentation becomes very coarse with high stride. To overcome this problem we designed a regression neuronal networks which is able to classify each pixel independently.
+The main disadvantage of our sliding window approach is that the segmentation becomes very coarse with high stride. To overcome this problem we designed a regression neural networks which is able to classify each pixel independently.
 
 \subsubsection{Definition of the Regression Problem}
 
-We trained a neuronal network to solve the following regression problem:
+We trained a neural network to solve the following regression problem:
 
 \fbox{
 	\begin{tabular}{l l}
-		\multicolumn{2}{l}{Regression Problem} \\
+		\multicolumn{2}{l}{\textbf{Regression Problem}} \\
 		\textit{Input:} & A $n \times n$ 3-channel pixel image section.\\
 		\textit{Output:} & A $n \times n$ label.
 	\end{tabular}
@@ -122,14 +125,17 @@ Similar to the classification approach our experiments show that a simple net to
 	\normalsize
 	\centering
 	\begin{tabular}{r l l}
-		Layer & Type  & Shape  \\
+		\toprule
+		\textbf{Layer} & \textbf{Type}  & \textbf{Shape}  \\
+		\midrule
 		0     & Input &  $51 \times 51 \times 3$ \\
 		1     & Convolution & 10 filter  each $5 \times 5$ \\
 		2     & Convolution & 1 filter $51 \times 51$  \\
 		3     & Reshape (Flatten) & $51 \times 51$ \\
 		4     & Output     & $51^2 \times 1$ \\
+		\bottomrule
 	\end{tabular}
-	\caption{Topology of our Regression Net}
+	\caption{Topology of the Regression Network.}
 	\label{tab:topo2}
 \end{table}
 
@@ -144,12 +150,12 @@ In order to evaluate a whole image using the regression approach we divide the i
 \begin{figure}[]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride51.png}
-	\caption{Using regression approach with stride of 51}
+	\caption{Using regression approach with stride $s=51$}
 	\label{fig:reg_stride2}
 \end{figure}
 
 
-One observation is, that the segmentation works better in the center of each patch. Close to the border of each image section the neuronal network does not have good information. To overcome this problem we use an evaluation stride again. This introduces an overlap between each image patch. An pixel p is than segmented according to the patch whose center is closer to p.
+One observation is, that the segmentation works better in the center of each patch. Close to the border of each image section the neural network does not have good information. To overcome this problem we use an evaluation stride again. This introduces an overlap between each image patch. A pixel p is than segmented according to the patch whose center is closer to p.
 
 
 
@@ -157,7 +163,7 @@ One observation is, that the segmentation works better in the center of each pat
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride37.png}
-	\caption{Using regression approach with stride of 37}
+	\caption{Using regression approach with stride $s=37$}
 	\label{fig:reg_stride37}
 \end{figure}
 
