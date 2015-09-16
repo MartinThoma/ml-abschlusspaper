@@ -6,10 +6,10 @@ In this section we discuss the experimental results of the models
 presented in \cref{sec:model}. First, we evaluate the two different
 models. Second, we compare our best one to the work of
 Mohan~\cite{Tarel2009} (which is ranked on place~1 at KITTI road
-segmentation~\cite{Tarel2009}). The KITTI Road Estimation dataset is the basis
+segmentation~\cite{Tarel2009}). The KITTI Road Estimation data set is the basis
 of our experiments (see \cref{sec:datasets}). \\
 To be able to evaluate different approaches we used only the
-training data of the KITTI dataset, as the ground truth for the test data is
+training data of the KITTI data set, as the ground truth for the test data is
 not publicly available. We splitted the training data beforehand 20 to 80
 (test/training) in order to be able to measure our performance. Our best model
 was submitted for the official KITTI evaluation
@@ -46,9 +46,9 @@ for training and testing):
             \bottomrule
         \end{tabular}
         \caption{Results of classification (cla.) and regression (reg.) models
-        with different strides $s$ on our own test set (58~images, $ ~6.7 \cdot
-        10^6$ pixels). The table entries highlighted in red are the best
-        results of their column.}
+                 with different strides $s$ on our own test set (58~images,
+                 $ ~6.7 \cdot 10^6$ pixels). The table entries highlighted in
+                 red are the best results of their column.}
         \label{tab:ownapproach}
     \end{center}
 \end{table}
@@ -56,7 +56,7 @@ for training and testing):
 \Cref{tab:ownapproach} shows the result of our evaluation and regression
 approach using the models and parameters as described in \cref{sec:model}. The
 used score is the $F_1$-measure \cref{eq:fMeasure} which is also used in the
-offical KITTI evaluation. The table also shows the values of true positive
+official KITTI evaluation. The table also shows the values of true positive
 (TP), true negative (TN), false positive (FP), false negative (FN) and accuracy
 (ACC) \cref{eq:accuracy}. It shows clearly that the regression model has an
 overall better $F_1$-measure and accuracy score than the classification model.
@@ -121,7 +121,7 @@ F_1-\text{measure} = \frac{2 \cdot TP}{2TP +FP +FN}
         \bottomrule
         \end{tabular}
     \end{center}
-    \caption{Results of the offical KITTI evaluation. (AP = Average Precision, PRE = Precision, REC = Recall, FPR = False Positive Rate, FNR = False Negative Rate)}
+    \caption{Results of the official KITTI evaluation. (AP = Average Precision, PRE = Precision, REC = Recall, FPR = False Positive Rate, FNR = False Negative Rate)}
     \label{tab:kitti}
 \end{table*}
 
@@ -151,7 +151,7 @@ achieves on all road categories a $F_1$-measure score of about
 
 \begin{enumerate}
     \item Overfitting of the neural network on our own test data
-    \item Specialisation of our two models on images with half the original
+    \item Specialization of our two models on images with half the original
           size (the KITTI evaluation is done on full size images)
     \item Visible in the two images of \cref{fig:sfig1} is an example of very
           bad performance on a part of the test image data. Basically more
