@@ -11,25 +11,31 @@ installation as simple as possible, this does not install all requirements.
 are still required and manually install them.
 
 \subsection{Functionality}
-\verb+sst+ makes use of Python files for new neural network definitions. Those
+\verb+sst+ makes use of Python files for neural network definitions. Those
 models have to have a \verb+generate_nnet(feature_vectors)+ function which
 returns an object with a \verb+fit(features, labels)+ method, a
 \verb+predict(feature_vector)+ method and a
 \verb+predict_proba(feature_vector)+ method. This is typically achieved by
 returning a \verb+nolearn+ model object. The Python network definition file
 has to have two global variables: \verb+patch_size+ (a positive integer) and
-\verb+fully+ (a boolean).
+\verb+fully+ (a Boolean). The first variable is the patch size expected by the
+neural network, the second variable indicates if the neural network was trained
+to classify each pixel of the complete patch (\verb+fully = True+) or only the
+center pixel (\verb+fully = False+).
 
 \verb+sst --help+ shows all subcommands. The subcommands are
 
 \begin{itemize}
-    \item \verb+selfcheck+: Test which components are missing / have to be
-          installed to be able to use all features of \verb+sst+.
-    \item \verb+train+: Train a new network.
-    \item \verb+eval+: Evaluate a trained network on a new photograph and also
-          generate an overlay of the segmentation and the data photograph.
+    \item \verb+selfcheck+: Test which components or Python packages are
+                            missing and have to be installed to be able to use
+                            all features of \verb+sst+.
+    \item \verb+train+: Train a neural network.
+    \item \verb+eval+: Evaluate a trained network on a photograph and also
+                       generate an overlay image of the segmentation and the
+                       data photograph.
     \item \verb+serve+: Start a web server which lets the user choose images
-          from the local file system to predict the label and to show overlays.
+                        from the local file system to predict the label and to
+                        show overlays.
     \item \verb+view+: Show all information about an existing model.
     \item \verb+video+: Generate a video.
 \end{itemize}

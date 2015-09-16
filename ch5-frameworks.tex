@@ -1,5 +1,14 @@
 %!TEX root = pixel-wise-street-segmentation.tex
 
 \section{Frameworks}\label{sec:frameworks}
-We used nolearn / Lasagne which is based on Theano\cite{Bergstra2010}. We
-also used Caffe\cite{Jia2014} for \glspl{CNN}.
+nolearn was used in combination with Lasagne~\cite{sander_dieleman_2015_27878}
+to train the models. Lasagne is based on Theano~\cite{Bergstra2010}. We also
+used Caffe~\cite{Jia2014} for \glspl{CNN}, but skipped that approach as the
+framework crashed very often for different training approaches without giving
+meaningful error messages.
+
+Theano is a Python library which allows symbolic computation of derivatives as
+well as automatic generation of GPU code. This is used to calculate the weight
+update function for arbitrary feed-forward networks. Lasagne makes using Theano
+simpler by providing some basic layer types with their update function and
+nolearn adds some syntactic sugar.
