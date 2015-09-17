@@ -6,9 +6,11 @@ Language of the document: English
 
 1. Introduction: All of us
 2. "Related Work" (Paper+CNN-Theory): Vitali
-3. Frameworks (Caffe, nolearn, Lasagne, Theano): Martin
-4. SST: Martin
-5. Datasets: Martin
-6. Our Model: Marvin
-7. Results (KITTI evaluation): Sebastian
-8. Discussion ("Ausblick?"): Marvin
+3. Frameworks : Martin
+   - Existing (Caffe, nolearn, Lasagne, Theano)
+   - SST
+4. Our Model: Marvin
+5. Results (KITTI evaluation)
+   - Datasets: Martin
+   - Method / Results: Sebastian
+6. Discussion ("Ausblick?"): Marvin, dann Martin
