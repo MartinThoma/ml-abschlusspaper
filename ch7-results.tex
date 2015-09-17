@@ -105,9 +105,6 @@ F_1-\text{measure} = \frac{2 \cdot TP}{2TP +FP +FN}
     \end{subfigure}
 \end{figure*}
 
-
-
-
 \begin{table*}[]
     \begin{center}
     \begin{tabular}{c|cccccc}
@@ -125,18 +122,12 @@ F_1-\text{measure} = \frac{2 \cdot TP}{2TP +FP +FN}
     \label{tab:kitti}
 \end{table*}
 
-
-
 To evaluate if we could meet our predefined time constraint (classification of
 one image in under \SI{20}{\milli\second}) we conducted a run time evaluation
 which is shown in \Cref{tab:runtime}. As expected, the runtime increases with a
 smaller stride size. The classification model shows an overall faster run time
 performance as the regression. Finally, we managed to achieve a run time under
 \SI{20}{\milli\second} by using a stride of $s=51$ in both approaches.
-
-
-
-
 
 As the regression approach had the best performance and also met our time
 constraint, we used it to evaluate the KITTI test set and submitted the results
@@ -166,12 +157,6 @@ different street types and lighting conditions.\\
 Finally \cref{fig:sfig2} gives some positives example where our neural network
 did well. Hardly no false positives and the street around the cars is nicely
 segmented.
-
-
-
-
-
-
 
 
 %\includegraphics[scale=0.2]{figures/kitty_eval/Persp_umm_road_000025.png}
