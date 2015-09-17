@@ -6,7 +6,7 @@ Language of the document: English
 
 1. Introduction: All of us
 2. "Related Work" (Paper+CNN-Theory): Vitali
-3. Frameworks : Martin
+3. Realization : Martin
    - Existing (Caffe, nolearn, Lasagne, Theano)
    - SST
 4. Our Model: Marvin
