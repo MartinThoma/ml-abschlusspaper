@@ -1,6 +1,7 @@
 %!TEX root = pixel-wise-street-segmentation.tex
 
-\section{Frameworks}\label{sec:frameworks}
+\section{Realization}
+\subsection{Existing Frameworks}\label{sec:frameworks}
 nolearn was used in combination with Lasagne~\cite{sander_dieleman_2015_27878}
 to train the models. Lasagne is based on Theano~\cite{Bergstra2010}. We also
 used Caffe~\cite{Jia2014} for \glspl{CNN}, but skipped that approach as the
@@ -14,3 +15,5 @@ simpler by providing some basic layer types like fully connected layers,
 convolutional layers and pooling layers with their update function. nolearn
 adds some syntactic sugar and neural network objects with a similar interface
 as the \verb+scikit-learn+ package uses for its classifiers~\cite{scikit-learn}.
+
+\input{ch5-sst}
