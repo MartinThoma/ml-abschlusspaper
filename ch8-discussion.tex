@@ -2,9 +2,25 @@
 
 \section{Discussion}\label{sec:discussion}
 
-In standard scenes both models work impressive. The street gets segmented very well and we reach a runtime of well below  $\SI{0.5}{\second}$. In some images the model does perform very badly. This are mainly images where with special situations such as an uncommon street colour and unusual lightning. We believe that this problems can be easily eliminated by using more training data. One approach to get better results on the kitty data set is to train the model with different data and only use the kitty training data for finetuning. 
+In standard scenes, the classification accuracy is impressive. The street gets
+segmented very well in a runtime of well below  $\SI{0.5}{\second}$. However,
+in some images the model does perform very badly. These are mainly images where
+with special situations such as an uncommon street color and unusual
+lightning. We believe that this problems can be easily eliminated by using more
+training data. One approach to get better results on the kitty data set is to
+train the model with different data and only use the kitty training data for
+fine-tuning.
 
-One advantage of our models is that they are perfectly parallelizable. Each  image section can be evaluated independently. This can be adventurous in practical applications. When using specialized hardware such as neuromorphic chips it is possible to build hundreds of cores in a car. In such a case our classification approach can yield outstanding results. Given enough trainings data (e.g. 1.2 Million Images) using GoogleNet or AlexNet can provide perfect classification results.
+One advantage of our models is that they are perfectly parallelizable. Each
+image section can be evaluated independently. This can be adventurous in
+practical applications. When using specialized hardware such as neuromorphic
+chips it is possible to build hundreds of cores in a car. In such a case our
+classification approach can yield outstanding results. Given enough training
+data (e.g. 1.2~million images) using GoogLeNet or AlexNet can provide perfect
+classification results.
 
-Finally one can also improve the results with better hardware. For some of our models the GPU RAM was the limiting factor. Especially for the regression model using bigger image section can lead to much better results in quality as well as in speed.
+Finally one can also improve the results with better hardware. For some of our
+models the \gls{GPU} RAM was the limiting factor. Especially for the regression
+model using bigger image section can lead to much better results in quality as
+well as in speed.
 
