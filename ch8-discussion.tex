@@ -5,11 +5,10 @@
 In standard scenes, the classification accuracy is impressive. The street gets
 segmented very well in a runtime of well below  $\SI{0.5}{\second}$. However,
 in some images the model does perform very badly. These are mainly images where
-with special situations such as an uncommon street color and unusual
-lightning. We believe that this problems can be easily eliminated by using more
-training data. One approach to get better results on the kitty data set is to
-train the model with different data and only use the kitty training data for
-fine-tuning.
+with special situations such as an uncommon street color and unusual lightning.
+We believe that these problems can be easily eliminated by using more training
+data. One approach to get better results on the KITTI data set is to train the
+model with different data and only use the KITTI training data for fine-tuning.
 
 One advantage of our models is that they are perfectly parallelizable. Each
 image section can be evaluated independently. This can be adventurous in
