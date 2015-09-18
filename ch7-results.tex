@@ -7,7 +7,8 @@ presented in \cref{sec:model}. First, we evaluate the two different
 models. Second, we compare our best one to the work of
 Mohan~\cite{Tarel2009} (which is ranked on place~1 at KITTI road
 segmentation~\cite{Tarel2009}). The KITTI Road Estimation data set is the basis
-of our experiments (see \cref{sec:datasets}). \\
+of our experiments (see \cref{sec:datasets}).
+
 \input{ch3-datasets}
 
 \subsection{Metrics / Experiments}
@@ -64,8 +65,8 @@ official KITTI evaluation. The table also shows the values of true positive
 (ACC) \cref{eq:accuracy}. It shows clearly that the regression model has an
 overall better $F_1$-measure and accuracy score than the classification model.
 Surprisingly, a smaller stride does not automatically lead to a better
-performance. The classification model shows with a stride of the size 37 the
-best result, while in the regression based approach a stride of 51 achieves the
+performance. The classification model shows with a stride of $s=37$ the
+best result, while in the regression based approach a stride $s=51$ achieves the
 best performance. Unfortunately the ram of the graphic card limited our
 possibility to use larger strides and patch sizes. This could have been a
 promising possibility to train and evaluate on a full image size and still keep
@@ -82,10 +83,10 @@ F_1-\text{measure} = \frac{2 \cdot TP}{2TP +FP +FN}
     \begin{center}
         \begin{tabular}{c|ccc}
             \toprule
-            \textbf{network type/stride} & \textbf{10} & \textbf{37} & \textbf{51} \\
+            \textbf{network type / stride $\bm{s}$} & 10 & 37 & 51 \\
             \midrule
-            \textbf{regression}     & 1.99 & 0.29 & 0.18 \\
-            \textbf{classification} & 1.83 & 0.2  & 0.11\\
+            \textbf{regression}     & \SI{1.99}{\second} & \SI{0.29}{\second} & \SI{0.18}{\second} \\
+            \textbf{classification} & \SI{1.83}{\second} & \SI{0.20}{\second}  & \SI{0.11}{\second}\\
             \bottomrule
         \end{tabular}
         \caption{Runtime per image ($621 \times 188$ pixel) in seconds.}
