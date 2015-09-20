@@ -35,7 +35,7 @@ own network detailed in \Cref{tab:topo}. With three hidden layers our network
 is rather small. Our experiments shows that this small networks performs better
 than networks with more layers. One reason for this is that the amount of
 labeled images is rather small. Hence smaller nets generalize much better.
-Secondly the binary decision task of recognizing street is much simpler than
+Secondly, the binary decision task of recognizing street is much simpler than
 detailed image classification. This simplicity is also reflect in the net
 topology.
 
@@ -111,7 +111,7 @@ where the net is trained to minimize the mean squared error of the output. The o
 	\label{fig:reg}
 \end{figure}
 
-Our goal is to choose $n$ as big as possible as $n^2$ is the number of pixel which can be classified at once. However due to GPU memory limitations we can not train a network with $n > 51$.
+Our goal is to choose $n$ as big as possible as $n^2$ is the number of pixels which can be classified at once. However due to GPU memory limitations we cannot train a network with $n > 51$.
 
 
 
@@ -155,7 +155,7 @@ In order to evaluate a whole image using the regression approach we divide the i
 \end{figure}
 
 
-One observation is, that the segmentation works better in the center of each patch. Close to the border of each image section the neural network does not have good information. To overcome this problem we use an evaluation stride again. This introduces an overlap between each image patch. A pixel p is then segmented according to the patch whose center is closer to p.
+One observation is, that the segmentation works better in the centre of each patch. Close to the border of each image section the neural network does not have good information. To overcome this problem we use an evaluation stride again. This introduces an overlap between each image patch. A pixel p is then segmented according to the patch whose centre is closer to p.
 
 
 
@@ -167,5 +167,5 @@ One observation is, that the segmentation works better in the center of each pat
 	\label{fig:reg_stride37}
 \end{figure}
 
-\Cref{fig:reg_stride37} shows the output when using a stride of 37. We see that the edge of the street is classified slightly better. To get this effect already a big stride between 37 and 47 is sufficient. In the regression approach there is no measurable benefit of using strides below 37.
+\Cref{fig:reg_stride37} shows the output when using a stride of 37. We see that the edge of the street is classified slightly better. In order to archive this effect a rather big stride between 37 and 47 is already sufficient. In the regression approach there is no measurable benefit of using strides below 37.
 
