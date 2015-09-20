@@ -4,7 +4,7 @@
 
 \subsection{The Sliding Window Approach}
 
-Traditionally neural networks are used for classification tasks and as discredited in the introduction they deliver impressive results. Our first approach is a sliding window model, which exploits the classification strength of deep neural networks.
+Traditionally neural networks are used for classification tasks and as described in \Cref{sec:related-work} they deliver impressive results. Our first approach is a sliding window model, which exploits the classification strength of deep neural networks.
 
 \subsubsection{Definition of the Classification Problem}
 
@@ -34,9 +34,9 @@ classification Net such as GoogleNet or Alexnet. For our solution we design our
 own network detailed in \Cref{tab:topo}. With three hidden layers our network
 is rather small. Our experiments shows that this small networks performs better
 than networks with more layers. One reason for this is that the amount of
-labeled images is rather small. Hence smaller nets will generalize much better.
+labeled images is rather small. Hence smaller nets generalize much better.
 Secondly the binary decision task of recognizing street is much simpler than
-detailed image classification. This simplicity will also reflect in the net
+detailed image classification. This simplicity is also reflect in the net
 topology.
 
 \begin{table}[H]
@@ -59,13 +59,13 @@ topology.
 
 \subsubsection{Training}
 
-The training data for this classification problem can be easily obtained by modifying the original training data. One advantage of our approach is, that we get a lot of training data out of each image. In theory we get one (distinct) datum for each pixel in each training image. However, it is not useful to actually use all of this data as patches which are close to each other are very similar.Hence the information gain of including these patches is very small. On the other hand if we generate an image section for each pixel we obtain more data than the memory of our GPU can handle. We therefore introduced a training stride. A stride of $s$ results in the center pixels having a distance of s in height and with to the next sections center pixel. This is important in the section generation step before training as well as for the pixel-wise classification. The overlap of two adjacent image is hence reduced to $n-s$, where $n \times n$ is the size of each image section. Empirical evaluations indicated that $s=10$ is a good default value for the trainings stride.
+The training data for this classification problem can be easily obtained by modifying the original training data. One advantage of our approach is, that we get a lot of training data out of each image. In theory we get one (distinct) datum for each pixel in each training image. However, it is not useful to actually use all of this data as patches which are close to each other are very similar. Hence the information gain of including these patches is very small. On the other hand if we generate an image section for each pixel we obtain more data than the memory of our GPU can handle. We therefore introduced a training stride. A stride of $s$ results in the center pixels having a distance of s in height and with to the next sections center pixel. This is important in the section generation step before training as well as for the pixel-wise classification. The overlap of two adjacent images is hence reduced to $n-s$, where $n \times n$ is the size of each image section. Empirical evaluations indicated that $s=10$ is a good default value for the trainings stride.
 
 
 
 \subsubsection{Evaluation}
 
-In order to apply a classification Net on the segmentation problem we used the well known sliding window approach. The main idea is to apply the classification net on each pixel p of the input image by generating the $n \times n$ image section with center pixel $p$. We use padding to be able to apply the method to pixels close to the border. \Cref{fig:stride2} shows the result of this approach.
+In order to apply a classification network on the segmentation problem we used the well known sliding window approach. The main idea is to apply the classification network on each pixel p of the input image by generating the $n \times n$ image section with center pixel $p$. We use padding to be able to apply the method to pixels close to the border. \Cref{fig:stride2} shows the result of this approach.
 
 \begin{figure}[H]
 	\centering
@@ -74,7 +74,7 @@ In order to apply a classification Net on the segmentation problem we used the w
 	\label{fig:stride2}
 \end{figure}
 
-The main disadvantage of this approach is the impractical runtime. For a 1 megapixel image we need to run 1 million classifications. This leads to a runtime of almost 2 minutes with our hardware. In order to reduce the evaluation time we introduced an evaluation stride $s$. Similar to the training stride we skip $s-1$ pixels in each dimension. This increases the evaluation speed by a factor of $s^2$. For the sliding window approach we found that a stride of $s = 10$ is a reasonable trade-off between speed and quality. \Cref{fig:stride10} shows the result of the sliding window approach with a stride $s=10$.
+The main disadvantage of this approach is the impractical runtime. For a 1~megapixel image we need to run 1~million classifications. This leads to a runtime of almost 2~minutes with our hardware. In order to reduce the evaluation time we introduced an evaluation stride $s$. Similar to the training stride we skip $s-1$ pixels in each dimension. This increases the evaluation speed by a factor of $s^2$. For the sliding window approach we found that a stride of $s = 10$ is a reasonable trade-off between speed and quality. \Cref{fig:stride10} shows the result of the sliding window approach with a stride of $s=10$.
 
 
 
@@ -145,7 +145,7 @@ Training of the regression model can be implemented analogously to the classific
 
 \subsubsection{Evaluation}
 
-In order to evaluate a whole image using the regression approach we divide the image into patches of size $n \times n$ and evaluate each patch individually. The output is shown in \Cref{fig:reg_stride2}. The result is quite impressive especially regarding the overall runtime of about $0.18$s.
+In order to evaluate a whole image using the regression approach we divide the image into patches of size $n \times n$ and evaluate each patch individually. The output is shown in \Cref{fig:reg_stride2}. The result is quite impressive especially regarding the overall runtime of about $\SI{0.18}{\second}$.
 
 \begin{figure}[]
 	\centering
@@ -155,7 +155,7 @@ In order to evaluate a whole image using the regression approach we divide the i
 \end{figure}
 
 
-One observation is, that the segmentation works better in the center of each patch. Close to the border of each image section the neural network does not have good information. To overcome this problem we use an evaluation stride again. This introduces an overlap between each image patch. A pixel p is than segmented according to the patch whose center is closer to p.
+One observation is, that the segmentation works better in the center of each patch. Close to the border of each image section the neural network does not have good information. To overcome this problem we use an evaluation stride again. This introduces an overlap between each image patch. A pixel p is then segmented according to the patch whose center is closer to p.
 
 
 
