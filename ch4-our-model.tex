@@ -2,6 +2,8 @@
 
 \section{Used models}\label{sec:model}
 
+We have implemented two approaches to tackle  the street segmentation Problem. We have used a Sliding Window Approach which is based on a classification network and a Regression approach. Both models are detailed in the following section.
+
 \subsection{The Sliding Window Approach}
 
 Traditionally neural networks are used for classification tasks and as described in \Cref{sec:related-work} they deliver impressive results. Our first approach is a sliding window model, which exploits the classification strength of deep neural networks.
@@ -56,7 +58,6 @@ topology.
 \caption{Topology of the Classification Network.}
 \label{tab:topo}
 \end{table}
-
 \subsubsection{Training}
 
 The training data for this classification problem can be easily obtained by modifying the original training data. One advantage of our approach is, that we get a lot of training data out of each image. In theory we get one (distinct) datum for each pixel in each training image. However, it is not useful to actually use all of this data as patches which are close to each other are very similar. Hence the information gain of including these patches is very small. On the other hand if we generate an image section for each pixel we obtain more data than the memory of our GPU can handle. We therefore introduced a training stride. A stride of $s$ results in the center pixels having a distance of s in height and with to the next sections center pixel. This is important in the section generation step before training as well as for the pixel-wise classification. The overlap of two adjacent images is hence reduced to $n-s$, where $n \times n$ is the size of each image section. Empirical evaluations indicated that $s=10$ is a good default value for the trainings stride.
@@ -121,6 +122,7 @@ Our goal is to choose $n$ as big as possible as $n^2$ is the number of pixels wh
 
 Similar to the classification approach our experiments show that a simple net topologies works best. The topology we used is detailed in \cref{tab:topo2}.
 
+\begin{savenotes}
 \begin{table}[H]
 	\normalsize
 	\centering
@@ -132,12 +134,13 @@ Similar to the classification approach our experiments show that a simple net to
 		1     & Convolution & 10 filter  each $5 \times 5$ \\
 		2     & Convolution & 1 filter $51 \times 51$  \\
 		3     & Reshape (Flatten) & $51 \times 51$ \\
-		4     & Output     & $51^2 \times 1$ \\
+		4     & Output     & $2601\footnote{$2601=51^2$} \times 1$ \\
 		\bottomrule
 	\end{tabular}
 	\caption{Topology of the Regression Network.}
 	\label{tab:topo2}
 \end{table}
+\end{savenotes}
 
 \subsubsection{Training}
 
