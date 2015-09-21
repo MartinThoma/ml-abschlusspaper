@@ -40,16 +40,26 @@ best-recorded result on the same data set we use, which is described in
 \section{Concept}\label{sec:concept}
 \subsection{CNN}
 A \gls{CNN} is a feed forward neural network with at least one convolutional layer. In general applying a function repeatedly  over the output of other function is defined as convolution. In context of \gls{CNN} a convolution layer is a learned filter which is applied at all possible offsets over an input image. The output of the filter can be seen as an abstraction of the input. Convolutional layer are often combined with pooling layer, which extract one single value out of a larger region. Examples for pooling layer are the average or max function.\\
-With a fully connected layer at the end \gls{CNN}s can be used for classification. The upper part of figure \ref{fig:fcn} shows such a network for classification. In the example the input image is classified as "tabby cat", because this class has the highest probability (illustrated as bar chart).
+With a fully connected layer at the end \gls{CNN}s can be used for
+classification. The upper part of \cref{fig:fcn} shows such a network for
+classification. In the example the input image is classified as \enquote{tabby
+cat}, because this class has the highest probability (illustrated as bar
+chart).
 
 \subsection{FCN}
-A \gls{CNN} which consist only of convolutional or pooling layer is also known as \gls{FCN}. By removing fully connected nodes the network can generate a output for a image with arbitrary size. In \cite{long2014fully} this characteristic is used to learn a network that produces a classification heatmap. In the lower part of figure \ref{fig:fcn} a heatmap with probability for detecting "tabby cat" at different image regions is generated from the input image.
+A \gls{CNN} which consist only of convolutional or pooling layer is also known
+as \gls{FCN}. By removing fully connected nodes the network can generate a
+output for a image with arbitrary size. In \cite{long2014fully} this
+characteristic is used to learn a network that produces a classification heat
+map. In the lower part of \cref{fig:fcn} a heat map with probability for
+detecting \enquote{tabby cat} at different image regions is generated from the
+input image.
 
 \begin{figure}[htb]
-\label{fig:fcn}
-	\centering
-	\includegraphics[width=9cm]{figures/fcnn}
-	\caption{Comparison of a \gls{CNN} for classification (top) and a \gls{FCN} which creates a heat map (bottom). \cite{long2014fully}}
+    \centering
+    \includegraphics[width=9cm]{figures/fcnn}
+    \caption{Comparison of a \gls{CNN} for classification (top) and a \gls{FCN} which creates a heat map (bottom). \cite{long2014fully}}
+    \label{fig:fcn}
 \end{figure}
 
 \subsection{Fully connected convolutional layer}

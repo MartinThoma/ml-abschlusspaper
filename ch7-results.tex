@@ -6,7 +6,7 @@ In this section we discuss the experimental results of the models
 presented in \cref{sec:model}. First, we evaluate the two different
 models. Second, we compare our best one to the work of
 Mohan~\cite{Tarel2009} (which is ranked on place~1 at KITTI road
-segmentation~\cite{Tarel2009}). 
+segmentation~\cite{Tarel2009}).
 \input{ch3-datasets}
 
 \subsection{Metrics / Experiments}
@@ -15,7 +15,7 @@ segmentation~\cite{Tarel2009}).
 
 For the evaluation of the following experiments we used these metrics:
 accuracy ($\mathbf{ACC}$), average precision ($\mathbf{AP}$), precision ($\mathbf{PRE}$),  recall ($\mathbf{REC}$), false positive rate ($\mathbf{FPR}$),  false negative rate ($\mathbf{FNR}$)
-and the $F_1$-measure ($\mathbf{F_1}$) \cref{eq:accuracy} - (\ref{eq:fMeasure}) (true positive (TP), true negative (TN), false positive (FP), false negative (FN)). 
+and the $F_1$-measure ($\mathbf{F_1}$) \cref{eq:accuracy} - (\ref{eq:fMeasure}) (true positive (TP), true negative (TN), false positive (FP), false negative (FN)).
 
 \begin{equation} \label{eq:accuracy}
 \text{ACC} = \frac{TP + TN}{TP + FP + TN + FN}
@@ -39,8 +39,8 @@ and the $F_1$-measure ($\mathbf{F_1}$) \cref{eq:accuracy} - (\ref{eq:fMeasure}) 
 F_1= \frac{2 \cdot TP}{2TP +FP +FN}
 \end{equation}
 
-%  
-In \cref{eq:ap}  $\text{Precision}(\tilde{r})$ is the measured precision at recall $\tilde{r}$ ~\cite{everingham2010pascal}. These metrics are also used by the offical KITTI evaluation. \\
+%
+In \cref{eq:ap}  $\text{Precision}(\tilde{r})$ is the measured precision at recall $\tilde{r}$ ~\cite{everingham2010pascal}. These metrics are also used by the official KITTI evaluation. \\
 To be able to evaluate different approaches we used only the
 training data of the KITTI data set, as the ground truth for the test data is
 not publicly available. We splitted the training data beforehand 20 to 80
@@ -50,7 +50,7 @@ was submitted for the official KITTI evaluation
 
 Our goal was to achieve an adequate classification performance while staying
 within a time frame of \textbf{\SI{20}{\milli\second}} as maximal
-classification time per image. This would allow our approach to be a used in a real-time application. 
+classification time per image. This would allow our approach to be a used in a real-time application.
 As the normal use case of road segmentation would be in autonomous cars the real-time ability is a crucial point.\\
 
 We used a computer with these specifications for the experiments (GPU was used
@@ -62,11 +62,11 @@ for training and testing):
 \end{itemize}
 
 \Cref{tab:ownapproach} shows the result of our evaluation and regression
-approach using the models and parameters as described in \cref{sec:model}. 
+approach using the models and parameters as described in \cref{sec:model}.
 It shows clearly that the regression model has an
 overall better $F_1$-measure and accuracy score than the classification model.
 Surprisingly, a smaller stride does not automatically lead to a better
-performance. The classification model shows  the best result with a stride of $s=37$, 
+performance. The classification model shows  the best result with a stride of $s=37$,
 while in the regression based approach a stride $s=51$ achieves the
 best performance. Unfortunately the RAM of the graphic card limited our
 possibility to use larger strides and patch sizes. This could have been a
@@ -91,7 +91,7 @@ our time constraint and even enhance our performance.\\
         \caption{Results of classification (cla.) and regression (reg.) models
                  with different strides $s$ on our own test set (58~images,
                  $ ~6.7 \cdot 10^6$ pixels). The table entries highlighted in
-                 red are the best evaluation score regarding different parametrizations.}
+                 red are the best evaluation score regarding different parameterizations.}
         \label{tab:ownapproach}
     \end{center}
 \end{table}
@@ -102,7 +102,7 @@ The predefined time constraint (classification of
 one image in under \SI{20}{\milli\second}) was meet which is shown by the run time evaluation
 displayed in \Cref{tab:runtime}. As expected, the runtime increases with a
 smaller stride size. The classification model shows an overall faster run time
-performance as the regression. Finally, we meet the time constraint 
+performance as the regression. Finally, we meet the time constraint
 by using a stride of $s=51$ in both approaches.
 
 \begin{table}[]
