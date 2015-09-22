@@ -9,7 +9,7 @@ section.
 
 \subsection{The Sliding Window Approach}
 Traditionally neural networks are used for classification tasks. As
-described in \Cref{sec:related-work} they deliver impressive results. Our first
+described in \cref{sec:related-work} they deliver impressive results. Our first
 approach is a sliding window model, which exploits the classification strength
 of deep neural networks.
 
@@ -39,14 +39,14 @@ visualized in \cref{fig:figure}.
 
 \subsubsection{Net Topology}
 The problem defined above can be tackled with any of the well known
-classification networks such as GoogLeNet or AlexNet. For our solution we design our
-own network detailed in \Cref{tab:topo}. With three hidden layers our network
-is rather small. Our experiments shows that small networks perform better
-than networks with more layers. One reason for this is that the amount of
-labeled images is rather small. Hence smaller nets generalize much better.
-Secondly, the binary decision task of recognizing street is much simpler than
-detailed image classification. This simplicity does also reflect in the net
-topology.
+classification networks such as GoogLeNet or AlexNet. For our solution we
+designed our own network detailed in \cref{tab:topo}. The small size of only
+three hidden layers was chosen as our experiments showed that small networks
+perform better than networks with more layers. One reason for this is that the
+amount of labeled images is rather small. Hence smaller nets generalize much
+better. Secondly, the binary decision task of recognizing street is much
+simpler than detailed image classification. This simplicity does also reflect
+in the net topology.
 
 \begin{table}[H]
 	\normalsize
@@ -62,7 +62,7 @@ topology.
 	4     & Output     & $1$ \\
 	\bottomrule
 \end{tabular}
-\caption{Topology of the Classification Network.}
+\caption{Topology of the classification network.}
 \label{tab:topo}
 \end{table}
 
@@ -70,11 +70,11 @@ topology.
 \subsubsection{Training}
 The training data for this classification problem can be easily obtained by
 modifying the original training data. One advantage of our approach is that we
-get a lot of training data out of each image. In theory we get one (distinct)
+get a lot of training data out of each image. In theory, we get one (distinct)
 datum for each pixel in each training image. However, it is not useful to
 actually use all of this data as patches which are close to each other and thus
 are very similar. Hence the information gain of including these patches is very
-small. On the other hand if we generate an image section for each pixel we
+small. On the other hand, if we generate an image section for each pixel we
 obtain more data than the memory of our GPU can handle. We therefore introduced
 a training stride. A stride of $s$ results in the center pixels having a
 distance of $s$ in height and with to the next sections center pixel. This is
@@ -95,7 +95,7 @@ result of this approach.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_sliding_stride2.png}
-	\caption{Using the sliding window approach with a stride $s=2$.}
+	\caption{Using the sliding window approach with a stride of $s=2$.}
 	\label{fig:stride2}
 \end{figure}
 
@@ -121,8 +121,9 @@ stride of $s=10$.
 
 \subsection{The Regression Approach}
 The main disadvantage of our sliding window approach is that the segmentation
-becomes very coarse with high stride. To overcome this problem we designed a
-regression neural networks which is able to classify each pixel independently.
+becomes very coarse with higher values for the stride $s$. To overcome this
+problem we designed a regression neural networks which is able to classify each
+pixel independently.
 
 \subsubsection{Definition of the Regression Problem}
 We trained a neural network to solve the following regression problem:
@@ -146,7 +147,7 @@ binary classification. \Cref{fig:reg} visualizes our regression approach.
 	\label{fig:reg}
 \end{figure}
 
-Our goal is to choose $n$ as big as possible as $n^2$ is the number of pixels
+The goal is to choose $n$ as big as possible as $n^2$ is the number of pixels
 which can be classified at once. However, due to GPU memory limitations we
 cannot train a network with $n > 51$.
 
@@ -167,7 +168,7 @@ topologies work best. The topology we used is detailed in \cref{tab:topo2}.
 		1     & Convolution & 10 filter  each $5 \times 5$ \\
 		2     & Convolution & 1 filter $51 \times 51$  \\
 		3     & Reshape (Flatten) & $51 \times 51$ \\
-		4     & Output     & $2601\footnote{$2601=51^2$} \times 1$ \\
+		4     & Output     & $2601\footnote{The shape of $2601 \times 1$ is a result of flattening the $51 \times 51$ image patch. This is only necessary due to tooling support.} \times 1$ \\
 		\bottomrule
 	\end{tabular}
 	\caption{Topology of the regression network.}
@@ -184,8 +185,9 @@ information out of the data as possible.
 \subsubsection{Evaluation}
 In order to evaluate a whole image using the regression approach we divide the
 image into patches of size $n \times n$ and evaluate each patch individually.
-The output is shown in \Cref{fig:reg_stride2}. The result is quite impressive,
-especially regarding the overall runtime of about $\SI{0.18}{\second}$.
+The output is shown in \cref{fig:reg_stride2}. The result is quite impressive,
+especially regarding the overall runtime of about $\SI{0.18}{\second}$ as shown
+in \cref{tab:runtime}.
 
 \begin{figure}[]
 	\centering

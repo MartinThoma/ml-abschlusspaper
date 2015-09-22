@@ -14,17 +14,17 @@ Later insights of general scene parsing where transferred and more generic
 approaches like \cite{6182716} have achieved remarkable results with a
 \gls{MRF} and superpixels.\\ The impressive classification results of
 \glspl{CNN} like AlexNet~\cite{krizhevsky2012imagenet} or
-GoogLeNet~\cite{SzegedyLJSRAEVR14} during the the Google ImageNet LSVRC-2010
+GoogLeNet~\cite{SzegedyLJSRAEVR14} during the Google ImageNet LSVRC-2010
 contest, made \glspl{CNN} interesting for all kinds of computer vision problems
-like e.g. segmentation.\\
+like segmentation.\\
 With \cite{long2014fully} Long and his team introduced a method for general
-scene parsing based on \glspl{FCN} and deconvolutional layer.\\
+scene parsing based on \glspl{FCN} and a deconvolutional layer.\\
 This approach is used as a blueprint to our implementation, described in
 \cref{sec:model}. Therefore the main concepts are introduced in
 \cref{sec:concept}.\\
 Instead of creating a new model, they converted existing classification
 \glspl{CNN} like AlexNet or GoogLeNet into \glspl{FCN}. The obtained heat maps for
-every class where calculated for multiple resolutions and upscaled with
+every class were calculated for multiple resolutions and upscaled with
 deconvolution layer interpolation to the original resolution. With a fully
 connected convolutional layer in the end, the multiple outputs are combined
 into one classification heat map for every class.\\
@@ -37,37 +37,52 @@ patch a separate neural network was trained. Their model achieved the
 best-recorded result on the same data set we use, which is described in
 \cref{sec:datasets}.
 
+
 \section{Concept}\label{sec:concept}
+Two concepts are explained in this section: \Glspl{CNN} and \glspl{FCN}, which
+were introduced in~\cite{long2014fully}.
+
 \subsection{CNN}
-A \gls{CNN} is a feed forward neural network with at least one convolutional layer. In general applying a function repeatedly  over the output of other function is defined as convolution. In context of \gls{CNN} a convolution layer is a learned filter which is applied at all possible offsets over an input image. The output of the filter can be seen as an abstraction of the input. Convolutional layer are often combined with pooling layer, which extract one single value out of a larger region. Examples for pooling layer are the average or max function.\\
-With a fully connected layer at the end \gls{CNN}s can be used for
-classification. The upper part of \cref{fig:fcn} shows such a network for
-classification. In the example the input image is classified as \enquote{tabby
-cat}, because this class has the highest probability (illustrated as bar
-chart).
+A \gls{CNN} is a feedforward neural network with at least one convolutional
+layer. In general, applying a function repeatedly over the output of other
+functions is defined as a convolution. In context of \gls{CNN} a convolution
+layer is a learned filter which is applied at all possible offsets over an
+input image. The output of the filter can be seen as an abstraction of the
+input. Convolutional layers are often combined with pooling layers, which
+extract one single value out of a larger region. Examples for pooling layer
+functions are the \verb+average+ or \verb+max+ function.\\
+\gls{CNN}s can be used for classification with a fully connected layer at the
+end. The upper part of \cref{fig:fcn} shows such a network
+for classification. In the example the input image is classified as
+\enquote{tabby cat}, because this class has the highest probability
+(illustrated as bar chart).
 
 \subsection{FCN}
-A \gls{CNN} which consist only of convolutional or pooling layer is also known
-as \gls{FCN}. By removing fully connected nodes the network can generate a
-output for a image with arbitrary size. In \cite{long2014fully} this
-characteristic is used to learn a network that produces a classification heat
-map. In the lower part of \cref{fig:fcn} a heat map with probability for
-detecting \enquote{tabby cat} at different image regions is generated from the
-input image.
+A \gls{CNN} which consists only of convolutional or pooling layers is also
+known as a \gls{FCN}. By removing fully connected nodes, the network can
+generate a output for an image with arbitrary size. In~\cite{long2014fully}
+this characteristic is used to train a network that produces a classification
+heat map. In the lower part of \cref{fig:fcn}, a heat map of probabilities for
+the presence of a \enquote{tabby cat} at different image regions is generated
+from the input image.
 
 \begin{figure}[htb]
     \centering
     \includegraphics[width=9cm]{figures/fcnn}
-    \caption{Comparison of a \gls{CNN} for classification (top) and a \gls{FCN} which creates a heat map (bottom). \cite{long2014fully}}
+    \caption{Comparison of a \gls{CNN} for classification (top) and a \gls{FCN} which creates a heat map (bottom). The image was taken from~\cite{long2014fully}.}
     \label{fig:fcn}
 \end{figure}
 
 \subsection{Fully connected convolutional layer}
 A fully connected convolutional layer is a regular convolutional layer in size
-of the input. Consequentially the weight matrix covers every input neuron. Long
-noted in \cite{long2014fully} that it is the two dimensional equivalent to
+of the input. Consequentially, the weight matrix covers every input neuron. Long
+noted in~\cite{long2014fully} that it is the two-dimensional equivalent to a
 fully connected layer in a classification \gls{CNN}.
 
 \subsection{Deconvolutional Layer}
 Deconvolutions are inverse convolutions. In context of neural networks the
-function for forward and backward calculation are just switched. It is often combined with unpooling and allows to learn how to reconstruct a larger image region from a smaller input. Long indicate in \cite{long2014fully} its similarity to interpolation. He explains it as highly parametrized non-linear interpolation.
+function for forward and backward calculation are just switched. It is often
+combined with unpooling and allows to learn how to reconstruct a larger image
+region from a smaller input. Long indicates in \cite{long2014fully} its
+similarity to interpolation. He explains it as a highly parametrized non-linear
+interpolation.
