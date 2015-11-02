@@ -1,8 +1,8 @@
 \documentclass[technote,a4paper,leqno]{IEEEtran}
+\pdfoutput=1
 \usepackage{amssymb, amsmath}
 
-
-\usepackage[a-1b]{pdfx}
+% \usepackage[a-1b]{pdfx}  % Not supported by arxiv
 \usepackage{filecontents}
 \begin{filecontents*}{\jobname.xmpdata}
     \Keywords{recognition\sep machine learning\sep neural networks\sep symbols\sep multilayer perceptron}
@@ -33,7 +33,9 @@
 \newcommand\mynobreakpar{\par\nobreak\@afterheading}
 \makeatother
 \usepackage[noadjust]{cite}
-\usepackage[nameinlink,noabbrev,capitalise]{cleveref} % has to be after hyperref, nthe l.137 ...eam attr{/N 4}  file{sRGBIEC1966-2.1.icmorem, amsthm
+
+% nameinlink, noabbrev: not supported by arxiv :-(
+\usepackage[capitalise]{cleveref} % has to be after hyperref, nthe l.137 ...eam attr{/N 4}  file{sRGBIEC1966-2.1.icmorem, amsthm
 \usepackage[binary-units,group-separator={,}]{siunitx}
 \sisetup{per-mode=fraction,binary-units=true}
 \DeclareSIUnit\pixel{px}
@@ -45,12 +47,13 @@
 \author{%
 \makebox[.4\linewidth]{Sebastian Bittel\thanks{\IEEEauthorrefmark{1} These authors contributed equally to this work}\IEEEauthorrefmark{1}}
 \and \makebox[.4\linewidth]{Vitali Kaiser\IEEEauthorrefmark{1}}\\
-\and \makebox[.4\linewidth]{Marvin Teichmann\IEEEauthorrefmark{1}}
+\and \makebox[.4\linewidth]{Marvin Teichmann\IEEEauthorrefmark{1}} % ORCID: http://orcid.org/0000-0002-9178-2970
 \and \makebox[.4\linewidth]{Martin Thoma\IEEEauthorrefmark{1}}} % ORCID: http://orcid.org/0000-0002-6517-1690
 
+% arxiv doesn't like \sep
 \hypersetup{
-    pdfauthor   = {Sebastian Bittel\sep Vitali Kaiser\sep Marvin Teichmann\sep Martin Thoma},
-    pdfkeywords = {recognition\sep machine learning\sep neural networks\sep classification\sep multilayer perceptron\sep deep learning},
+    pdfauthor   = {Sebastian Bittel, Vitali Kaiser, Marvin Teichmann, Martin Thoma},
+    pdfkeywords = {recognition, machine learning, neural networks, classification, multilayer perceptron, deep learning},
     pdfsubject  = {Recognition},
     pdftitle    = {Pixel-wise Segmentation of Street with Neural Networks},
 }

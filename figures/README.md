@@ -1,3 +1,4 @@
+%auto-ignore
 All figures / images should be here.
 
 ## Copyright notice
