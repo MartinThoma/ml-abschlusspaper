@@ -18,11 +18,11 @@ We trained a neural network to solve the following binary classification
 problem:
 
 \fbox{
-	\begin{tabular}{l l}
-		\multicolumn{2}{l}{\textbf{Classification Problem}} \\
-		\textit{Input:} & A $n \times n$ 3-channel pixel image section.\\
-		\textit{Output:} & Decide whether the center pixel is street.
-	\end{tabular}
+    \begin{tabular}{l l}
+        \multicolumn{2}{l}{\textbf{Classification Problem}} \\
+        \textit{Input:} & A $n \times n$ 3-channel pixel image section.\\
+        \textit{Output:} & Decide whether the center pixel is street.
+    \end{tabular}
 }
 
 For $n$ we used $51$. This constant was chosen as we ran into GPU memory
@@ -30,10 +30,10 @@ problems when training on higher values of $n$. Our classification approach is
 visualized in \cref{fig:figure}.
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\columnwidth]{figures/models/sliding_window.png}
-	\caption{Visualization of the classification problem solved by our neural network.}
-	\label{fig:figure}
+    \centering
+    \includegraphics[width=0.5\columnwidth]{figures/models/sliding_window.png}
+    \caption{Visualization of the classification problem solved by our neural network.}%
+\label{fig:figure}
 \end{figure}
 
 
@@ -49,18 +49,18 @@ simpler than detailed image classification. This simplicity does also reflect
 in the net topology.
 
 \begin{table}[H]
-	\normalsize
-	\centering
+    \normalsize
+    \centering
 \begin{tabular}{r  l l}
-	\toprule
-	\textbf{Layer} & \textbf{Type}  & \textbf{Shape}  \\
-	\midrule
-	0     & Input &  $51 \times 51 \times 3$ \\
-	1     & Convolution & 10 filter  each $5 \times 5$ \\
-	2     & Convolution & 10 filter  each $5 \times 5$  \\
-	3     & Pooling     & $2 \times 2$ \\
-	4     & Output     & $1$ \\
-	\bottomrule
+    \toprule
+    \textbf{Layer} & \textbf{Type}  & \textbf{Shape}  \\
+    \midrule
+    0     & Input &  $51 \times 51 \times 3$ \\
+    1     & Convolution & 10 filter  each $5 \times 5$ \\
+    2     & Convolution & 10 filter  each $5 \times 5$  \\
+    3     & Pooling     & $2 \times 2$ \\
+    4     & Output     & $1$ \\
+    \bottomrule
 \end{tabular}
 \caption{Topology of the classification network.}
 \label{tab:topo}
@@ -93,10 +93,10 @@ apply the method to pixels close to the border. \Cref{fig:stride2} shows the
 result of this approach.
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_sliding_stride2.png}
-	\caption{Using the sliding window approach with a stride of $s=2$.}
-	\label{fig:stride2}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/models/testing2-um_32_sliding_stride2.png}
+    \caption{Using the sliding window approach with a stride of $s=2$.}%
+\label{fig:stride2}
 \end{figure}
 
 The main disadvantage of this approach is the impractical runtime. For a
@@ -112,10 +112,10 @@ stride of $s=10$.
 
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_sliding_stride10.png}
-	\caption{Using the sliding window approach with a stride of $s=10$.}
-	\label{fig:stride10}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/models/testing2-um_32_sliding_stride10.png}
+    \caption{Using the sliding window approach with a stride of $s=10$.}%
+\label{fig:stride10}
 \end{figure}
 
 
@@ -129,11 +129,11 @@ pixel independently.
 We trained a neural network to solve the following regression problem:
 
 \fbox{
-	\begin{tabular}{l l}
-		\multicolumn{2}{l}{\textbf{Regression Problem}} \\
-		\textit{Input:} & A $n \times n$ 3-channel pixel image section.\\
-		\textit{Output:} & A $n \times n$ label.
-	\end{tabular}
+    \begin{tabular}{l l}
+        \multicolumn{2}{l}{\textbf{Regression Problem}} \\
+        \textit{Input:} & A $n \times n$ 3-channel pixel image section.\\
+        \textit{Output:} & A $n \times n$ label.
+    \end{tabular}
 }
 
 where the net is trained to minimize the mean squared error of the output. The
@@ -141,10 +141,10 @@ output of the regression net is continuous. We round the output to obtain a
 binary classification. \Cref{fig:reg} visualizes our regression approach.
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\columnwidth]{figures/models/fully-conv.png}
-	\caption{Visualization of the regression approach.}
-	\label{fig:reg}
+    \centering
+    \includegraphics[width=0.5\columnwidth]{figures/models/fully-conv.png}
+    \caption{Visualization of the regression approach.}%
+\label{fig:reg}
 \end{figure}
 
 The goal is to choose $n$ as big as possible as $n^2$ is the number of pixels
@@ -158,22 +158,23 @@ topologies work best. The topology we used is detailed in \cref{tab:topo2}.
 
 \begin{savenotes}
 \begin{table}[H]
-	\normalsize
-	\centering
-	\begin{tabular}{r l l}
-		\toprule
-		\textbf{Layer} & \textbf{Type}  & \textbf{Shape}  \\
-		\midrule
-		0     & Input &  $51 \times 51 \times 3$ \\
-		1     & Convolution & 10 filter  each $5 \times 5$ \\
-		2     & Convolution & 1 filter $51 \times 51$  \\
-		3     & Reshape (Flatten) & $51 \times 51$ \\
-		4     & Output     & $2601\footnote{The shape of $2601 \times 1$ is a result of flattening the $51 \times 51$ image patch. This is only necessary due to tooling support.} \times 1$ \\
-		\bottomrule
-	\end{tabular}
-	\caption{Topology of the regression network.}
-	\label{tab:topo2}
+    \normalsize
+    \centering
+    \begin{tabular}{r l l}
+        \toprule
+        \textbf{Layer} & \textbf{Type}  & \textbf{Shape}  \\
+        \midrule
+        0     & Input &  $51 \times 51 \times 3$ \\
+        1     & Convolution & 10 filter  each $5 \times 5$ \\
+        2     & Convolution & 1 filter $51 \times 51$  \\
+        3     & Reshape (Flatten) & $51 \times 51$ \\
+        4     & Output     & $2601\footnotemark \times 1$\\
+        \bottomrule
+    \end{tabular}
+    \caption{Topology of the regression network.}%
+\label{tab:topo2}
 \end{table}
+\footnotetext{The shape of $2601 \times 1$ is a result of flattening the $51 \times 51$ image patch. This is only necessary due to tooling support.}
 \end{savenotes}
 
 
@@ -190,10 +191,10 @@ especially regarding the overall runtime of about $\SI{0.18}{\second}$ as shown
 in \cref{tab:runtime}.
 
 \begin{figure}[]
-	\centering
-	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride51.png}
-	\caption{Using regression approach with stride $s=51$}
-	\label{fig:reg_stride2}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride51.png}
+    \caption{Using regression approach with stride $s=51$}%
+\label{fig:reg_stride2}
 \end{figure}
 
 
@@ -205,10 +206,10 @@ segmented according to the patch whose center is closer to $p$.
 
 
 \begin{figure}[]
-	\centering
-	\includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride37.png}
-	\caption{Using regression approach with stride $s=37$}
-	\label{fig:reg_stride37}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride37.png}
+    \caption{Using regression approach with stride $s=37$}%
+\label{fig:reg_stride37}
 \end{figure}
 
 \Cref{fig:reg_stride37} shows the output when using a stride of 37. We see that
