@@ -10,13 +10,13 @@ segmentation~\cite{Tarel2009}).
 \input{ch3-datasets}
 
 \subsection{Metrics / Experiments}
-
-
-
-For the evaluation of the following experiments we used these metrics:
-accuracy ($\mathbf{ACC}$), average precision ($\mathbf{AP}$), precision ($\mathbf{PRE}$),  recall ($\mathbf{REC}$), false positive rate ($\mathbf{FPR}$),  false negative rate ($\mathbf{FNR}$)
-and the $F_1$-measure ($\mathbf{F_1}$), see~\crefrange{eq:accuracy}{eq:fMeasure}.
-Those metrics make use of true positive (TP), true negative (TN), false positive (FP) and false negative (FN).
+For the evaluation of the following experiments we used these metrics: accuracy
+($\mathbf{ACC}$), average precision ($\mathbf{AP}$), precision
+($\mathbf{PRE}$),  recall ($\mathbf{REC}$), false positive rate
+($\mathbf{FPR}$),  false negative rate ($\mathbf{FNR}$) and the $F_1$-measure
+($\mathbf{F_1}$), see~\crefrange{eq:accuracy}{eq:fMeasure}. Those metrics make
+use of true positive (TP), true negative (TN), false positive (FP) and false
+negative (FN).
 
 \begin{align}\label{eq:accuracy}
 \text{ACC} &= \frac{TP + TN}{TP + FP + TN + FN}\\
@@ -28,13 +28,13 @@ Those metrics make use of true positive (TP), true negative (TN), false positive
 F_1 &= \frac{2 \cdot TP}{2TP +FP +FN}\label{eq:fMeasure}
 \end{align}
 
-%
-In \cref{eq:ap}  $\text{Precision}(\tilde{r})$ is the measured precision at recall $\tilde{r}$~\cite{everingham2010pascal}. These metrics are also used by the official KITTI evaluation. \\
-To be able to evaluate different approaches we used only the
-training data of the KITTI data set, as the ground truth for the test data is
-not publicly available. We splitted the training data beforehand 20 to 80
-(test/training) in order to be able to measure our performance. Our best model
-was submitted for the official KITTI evaluation
+In \cref{eq:ap}  $\text{Precision}(\tilde{r})$ is the measured precision at
+recall $\tilde{r}$~\cite{everingham2010pascal}. These metrics are also used by
+the official KITTI evaluation. \\ To be able to evaluate different approaches
+we used only the training data of the KITTI data set, as the ground truth for
+the test data is not publicly available. We splitted the training data
+beforehand 20 to 80 (test/training) in order to be able to measure our
+performance. Our best model was submitted for the official KITTI evaluation
 (\href{http://www.cvlibs.net/datasets/kitti/eval_road.php}{www.cvlibs.net/datasets/kitti/eval\_road.php})\\
 
 Our goal was to achieve an adequate classification performance while staying
@@ -51,16 +51,16 @@ for training and testing):
 \end{itemize}
 
 \Cref{tab:ownapproach} shows the result of our evaluation and regression
-approach using the models and parameters as described in \cref{sec:model}.
-It shows clearly that the regression model has an
-overall better $F_1$-measure and accuracy score than the classification model.
-Surprisingly, a smaller stride does not automatically lead to better
-performance. The classification model shows  the best result with a stride of $s=37$,
-while in the regression based approach a stride $s=51$ achieves the
-best performance. Unfortunately the RAM of the graphic card limited our
-possibility to use larger strides and patch sizes. This could have been a
-promising possibility to train and evaluate on a full image size and still keep
-our time constraint and even enhance our performance.\\
+approach using the models and parameters as described in \cref{sec:model}. It
+shows clearly that the regression model has an overall better $F_1$-measure and
+accuracy score than the classification model. Surprisingly, a smaller stride
+does not automatically lead to better performance. The classification model
+shows  the best result with a stride of $s=37$, while in the regression based
+approach a stride $s=51$ achieves the best performance. Unfortunately the RAM
+of the graphic card limited our possibility to use larger strides and patch
+sizes. This could have been a promising possibility to train and evaluate on a
+full image size and still keep our time constraint and even enhance our
+performance.\\
 
 \begin{table}[tbp]
     \centering
@@ -84,14 +84,12 @@ our time constraint and even enhance our performance.\\
 \label{tab:ownapproach}
 \end{table}
 
-
-
-The predefined time constraint (classification of
-one image in under \SI{20}{\milli\second}) was met which is shown by the run time evaluation
+The predefined time constraint (classification of one image in under
+\SI{20}{\milli\second}) was met which is shown by the run time evaluation
 displayed in \Cref{tab:runtime}. As expected, the runtime increases with a
 smaller stride size. The classification model shows an overall faster run time
-performance as the regression. Finally, we meet the time constraint
-by using a stride of $s=51$ in both approaches.
+performance as the regression. Finally, we meet the time constraint by using a
+stride of $s=51$ in both approaches.
 
 \begin{table}[tbp]
     \centering
@@ -143,9 +141,9 @@ As the regression approach had the best performance and also met our time
 constraint, we used it to evaluate the KITTI test set and submitted the results
 after a transformation into birds eye view (KITTI
 specifications).\Cref{tab:kitti} shows the results which are split into the
-different road types (UM, UMM, UU, URBAN).
-Unfortunately, our regression model performs much worse on the official test
-set than on our own test set. Here the $F_1$-measure score ranges between
+different road types (UM, UMM, UU, URBAN). Unfortunately, our regression model
+performs much worse on the official test set than on our own test set. Here the
+$F_1$-measure score ranges between
 \SI{56.4}{\percent} and \SI{79.7}{\percent} while Mohan ~\cite{Tarel2009}
 achieves on all road categories a $F_1$-measure score of about
 \SI{90.0}{\percent}. The reason for this huge difference might be: \\
@@ -165,11 +163,5 @@ achieves on all road categories a $F_1$-measure score of about
 To improve the latter it would be essential to use training data of a lot more
 different street types and lighting conditions.\\
 Finally \cref{fig:sfig2} gives some positives example where our neural network
-did well. There are hardly no false positives and the street around the cars is nicely
-segmented.
-
-
-%\includegraphics[scale=0.2]{figures/kitti_eval/Persp_umm_road_000025.png}
-%\includegraphics[scale=0.2]{figures/kitti_eval/Persp_umm_road_000040.png}
-%\includegraphics[scale=0.2]{figures/kitti_eval/Persp_umm_road_000066.png}
-%\includegraphics[scale=0.2]{figures/kitti_eval/Persp_uu_road_000020.png}
+did well. There are hardly no false positives and the street around the cars is
+nicely segmented.
