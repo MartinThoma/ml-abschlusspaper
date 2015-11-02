@@ -190,7 +190,7 @@ The output is shown in \cref{fig:reg_stride2}. The result is quite impressive,
 especially regarding the overall runtime of about $\SI{0.18}{\second}$ as shown
 in \cref{tab:runtime}.
 
-\begin{figure}[]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride51.png}
     \caption{Using regression approach with stride $s=51$}%
@@ -205,7 +205,7 @@ This introduces an overlap between each image patch. A pixel $p$ is then
 segmented according to the patch whose center is closer to $p$.
 
 
-\begin{figure}[]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=\columnwidth]{figures/models/testing2-um_32_conv_stride37.png}
     \caption{Using regression approach with stride $s=37$}%

@@ -62,27 +62,26 @@ possibility to use larger strides and patch sizes. This could have been a
 promising possibility to train and evaluate on a full image size and still keep
 our time constraint and even enhance our performance.\\
 
-\begin{table}[]
-    \begin{center}
-        \begin{tabular}{c|cccccc}
-            \toprule
-            \textbf{Model} & {\bf $\mathbf{F_1}$} & \textbf{TN} & \textbf{FP} & \textbf{FN} & \textbf{TP} & \textbf{ACC} \\
-            \midrule
-            \textbf{Reg., $s=10$} & \SI{88.0}{\percent} & \SI{97.8}{\percent} & \SI{2.2}{\percent}& \SI{19.7}{\percent}& \SI{80.2}{\percent}& \SI{94.7}{\percent}\\
-            \textbf{Reg., $s=37$} & \SI{89.0}{\percent}& \SI{97.3}{\percent}& \SI{2.6}{\percent}& \SI{17.6}{\percent}& \SI{82.3}{\percent} &  \textcolor{red}{\SI{94.8}{\percent}}\\
-            \textbf{Reg., $s=51$} & \textcolor{red}{\SI{89.5}{\percent}} &\SI{96.9}{\percent} & \SI{3.1}{\percent} & \SI{16.5}{\percent}& \textcolor{red}{\SI{83.5}{\percent}} & \SI{94.6}{\percent}\\
-            \midrule
-            \textbf{Cla., $s=10$} & \SI{85.4}{\percent} & \SI{98.1}{\percent}& \SI{1.9}{\percent}&\SI{24.1}{\percent} & \SI{75.8}{\percent} & \SI{94.2}{\percent}\\
-            \textbf{Cla., $s=37$} & \SI{86.2}{\percent}& \SI{95.9}{\percent} & \SI{4.1}{\percent} & \SI{21.2}{\percent} & \SI{78.7}{\percent} & \SI{92.9}{\percent}\\
-            \textbf{Cla., $s=51$} & \SI{70.1}{\percent} & \textcolor{red}{\SI{98.2}{\percent}} & \SI{1.8}{\percent} & \SI{45.1}{\percent} & \SI{54.9}{\percent} & \SI{90.6}{\percent}\\
-            \bottomrule
-        \end{tabular}
-        \caption{Results of classification (cla.) and regression (reg.) models
-                 with different strides $s$ on our own test set (58~images,
-                 $ ~6.7 \cdot 10^6$ pixels). The table entries highlighted in
-                 red are the best evaluation scores regarding different parameterizations.}%
+\begin{table}[tbp]
+    \centering
+    \begin{tabular}{c|cccccc}
+        \toprule
+        \textbf{Model} & $\mathbf{F_1}$ & \textbf{TN} & \textbf{FP} & \textbf{FN} & \textbf{TP} & \textbf{ACC} \\
+        \midrule
+        \textbf{Reg., $s=10$} & \SI{88.0}{\percent} & \SI{97.8}{\percent} & \SI{2.2}{\percent}& \SI{19.7}{\percent}& \SI{80.2}{\percent}& \SI{94.7}{\percent}\\
+        \textbf{Reg., $s=37$} & \SI{89.0}{\percent}& \SI{97.3}{\percent}& \SI{2.6}{\percent}& \SI{17.6}{\percent}& \SI{82.3}{\percent} &  \textcolor{red}{\SI{94.8}{\percent}}\\
+        \textbf{Reg., $s=51$} & \textcolor{red}{\SI{89.5}{\percent}} &\SI{96.9}{\percent} & \SI{3.1}{\percent} & \SI{16.5}{\percent}& \textcolor{red}{\SI{83.5}{\percent}} & \SI{94.6}{\percent}\\
+        \midrule
+        \textbf{Cla., $s=10$} & \SI{85.4}{\percent} & \SI{98.1}{\percent}& \SI{1.9}{\percent}&\SI{24.1}{\percent} & \SI{75.8}{\percent} & \SI{94.2}{\percent}\\
+        \textbf{Cla., $s=37$} & \SI{86.2}{\percent}& \SI{95.9}{\percent} & \SI{4.1}{\percent} & \SI{21.2}{\percent} & \SI{78.7}{\percent} & \SI{92.9}{\percent}\\
+        \textbf{Cla., $s=51$} & \SI{70.1}{\percent} & \textcolor{red}{\SI{98.2}{\percent}} & \SI{1.8}{\percent} & \SI{45.1}{\percent} & \SI{54.9}{\percent} & \SI{90.6}{\percent}\\
+        \bottomrule
+    \end{tabular}
+    \caption{Results of classification (cla.) and regression (reg.) models
+             with different strides $s$ on our own test set (58~images,
+             $ ~6.7 \cdot 10^6$ pixels). The table entries highlighted in
+             red are the best evaluation scores regarding different parameterizations.}%
 \label{tab:ownapproach}
-    \end{center}
 \end{table}
 
 
@@ -94,19 +93,18 @@ smaller stride size. The classification model shows an overall faster run time
 performance as the regression. Finally, we meet the time constraint
 by using a stride of $s=51$ in both approaches.
 
-\begin{table}[]
-    \begin{center}
-        \begin{tabular}{c|ccc}
-            \toprule
-            \textbf{network type / stride $\bm{s}$} & 10 & 37 & 51 \\
-            \midrule
-            \textbf{regression}     & \SI{1.99}{\second} & \SI{0.29}{\second} & \SI{0.18}{\second} \\
-            \textbf{classification} & \SI{1.83}{\second} & \SI{0.20}{\second}  & \SI{0.11}{\second}\\
-            \bottomrule
-        \end{tabular}
-        \caption{Runtime per image ($621 \times 188$ pixel).}%
+\begin{table}[tbp]
+    \centering
+    \begin{tabular}{c|ccc}
+        \toprule
+        \textbf{network type / stride $\bm{s}$} & 10 & 37 & 51 \\
+        \midrule
+        \textbf{regression}     & \SI{1.99}{\second} & \SI{0.29}{\second} & \SI{0.18}{\second} \\
+        \textbf{classification} & \SI{1.83}{\second} & \SI{0.20}{\second}  & \SI{0.11}{\second}\\
+        \bottomrule
+    \end{tabular}
+    \caption{Runtime per image ($621 \times 188$ pixel).}%
 \label{tab:runtime}
-    \end{center}
 \end{table}
 
 \begin{figure*}[]
@@ -125,22 +123,20 @@ by using a stride of $s=51$ in both approaches.
 \end{figure*}
 
 \begin{table*}[]
-    \begin{center}
+    \centering
     \begin{tabular}{c|cccccc}
-        \toprule
-        {\bf Benchmark} & {\bf $\mathbf{F_1}$} & {\bf AP} & {\bf PRE} & {\bf REC} & {\bf FPR} & {\bf FNR}\\
-        \midrule
-        UM    & \SI{67.91}{\percent} & \SI{61.63}{\percent} & \SI{86.90}{\percent} & \SI{55.74}{\percent} & \SI{3.83}{\percent} & \SI{44.26}{\percent}\\
-        UMM   & \SI{79.67}{\percent} & \SI{78.41}{\percent} & \SI{93.29}{\percent} & \SI{69.51}{\percent} & \SI{5.50}{\percent} & \SI{30.49}{\percent}\\
-        UU    & \SI{56.48}{\percent} & \SI{51.89}{\percent} & \SI{84.67}{\percent} & \SI{42.37}{\percent} & \SI{2.50}{\percent} & \SI{57.63}{\percent}\\
-        URBAN & \SI{71.10}{\percent} & \SI{65.14}{\percent} & \SI{89.83}{\percent} & \SI{58.84}{\percent} & \SI{3.67}{\percent} & \SI{41.16}{\percent}\\
-        \bottomrule
-        \end{tabular}
-    \end{center}
+    \toprule
+    \textbf{Benchmark} & $\mathbf{F_1}$ & \textbf{AP} & \textbf{PRE} & \textbf{REC} & \textbf{FPR} & \textbf{FNR}\\
+    \midrule
+    UM    & \SI{67.91}{\percent} & \SI{61.63}{\percent} & \SI{86.90}{\percent} & \SI{55.74}{\percent} & \SI{3.83}{\percent} & \SI{44.26}{\percent}\\
+    UMM   & \SI{79.67}{\percent} & \SI{78.41}{\percent} & \SI{93.29}{\percent} & \SI{69.51}{\percent} & \SI{5.50}{\percent} & \SI{30.49}{\percent}\\
+    UU    & \SI{56.48}{\percent} & \SI{51.89}{\percent} & \SI{84.67}{\percent} & \SI{42.37}{\percent} & \SI{2.50}{\percent} & \SI{57.63}{\percent}\\
+    URBAN & \SI{71.10}{\percent} & \SI{65.14}{\percent} & \SI{89.83}{\percent} & \SI{58.84}{\percent} & \SI{3.67}{\percent} & \SI{41.16}{\percent}\\
+    \bottomrule
+    \end{tabular}
     \caption{Results of our regression model (stride 51) on the official KITTI evaluation with different road types.}%
 \label{tab:kitti}
 \end{table*}
-
 
 
 As the regression approach had the best performance and also met our time
